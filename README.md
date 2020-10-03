@@ -45,10 +45,10 @@ A projekt célja a családi költségek nyomon követése, naplózása. A felhas
   
 ### Objektumok közötti reláció  
   
-- **felhasználó** - család  (1 <-> N)
-- **családok** - család  (1<->n)
-- **család** - költségek  (n<->n)
-- **felhasználó** - meghívás (1<->n)
+- **felhasználó - család**  (1 <-> N)
+- **családok - család**  (1<->n)
+- **család - költségek**  (n<->n)
+- **felhasználó - meghívás** (1<->n)
 
 ## Feladat nem funkcionális követelményei  
   
