@@ -1,17 +1,20 @@
-import express from 'express';
-import * as bodyParser from 'body-parser';
+import express from "express";
+import * as bodyParser from "body-parser";
 
 const app = express();
 
-app.use(bodyParser.json({
-    limit: '50mb',
+app.use(
+  bodyParser.json({
+    limit: "50mb",
     verify(req: any, res, buf, encoding) {
-        req.rawBody = buf;
-    }
-}));
+      req.rawBody = buf;
+    },
+  })
+);
 
-
-app.get('/', (req, res) => res.send('Hello World!'));
-
+app.post("/", (req, res) => {
+  console.log(req.body);
+  res.send(req.body);
+});
 
 export { app };
