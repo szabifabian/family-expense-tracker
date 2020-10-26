@@ -4,7 +4,7 @@
   "description": "A projekt célja a családi költségek nyomon követése, naplózása. A felhasználók létrehozhatnak családi csoportot, ahova meghívhatják a család a többi tagját az egyedi azonosítójuk segítségével. A családon belül lehetőség van a bevételek, kiadások felvételére, kezelésére, amelyet a vizuális megjelenés szemléletesebbé tesz. (chartok). Az alkalmazást több család is használhatja egymástól függetlenül.",
   "main": "src/index.ts",
   "scripts": {
-    "start": "node --inspect=5858 -r ts-node/register ./src/index.ts",
+    "start": "nodemon src/index.ts",
     "start:watch": "nodemon",
     "build": "tsc"
   },
@@ -31,18 +31,5 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "nodemon": "^2.0.4"
-  },
-  "nodemonConfig": {
-    "ignore": [
-      "**/*.test.ts",
-      "**/*.spec.ts",
-      ".git",
-      "node_modules"
-    ],
-    "watch": [
-      "src"
-    ],
-    "exec": "npm start",
-    "ext": "ts"
   }
 }
