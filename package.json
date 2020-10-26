@@ -1,40 +1,46 @@
 {
-  "name": "family-expense-tracker",
+  "name": "mikroorm-express",
   "version": "1.0.0",
-  "description": "A projekt célja a családi költségek nyomon követése, naplózása. A felhasználók létrehozhatnak családi csoportot, ahova meghívhatják a család a többi tagját az egyedi azonosítójuk segítségével. A családon belül lehetőség van a bevételek, kiadások felvételére, kezelésére, amelyet a vizuális megjelenés szemléletesebbé tesz. (chartok). Az alkalmazást több család is használhatja egymástól függetlenül.",
-  "main": "src/index.ts",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.ts",
-    "start:watch": "nodemon",
-    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.ts",
+    "build": "tsc --project ./src --outDir dist",
+    "test": "cross-env NODE_ENV=test jest --forceExit",
+    "pretest": "cross-env NODE_ENV=test npm run create:db && cross-env NODE_ENV=test mikro-orm database:import test/seed.sql",
     "create:db": "mikro-orm schema:drop -r && mikro-orm schema:create -r"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/szabifabian/family-expense-tracker.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/szabifabian/family-expense-tracker/issues"
-  },
-  "homepage": "https://github.com/szabifabian/family-expense-tracker#readme",
-  "devDependencies": {
-    "@mikro-orm/cli": "^4.2.3",
-    "@types/body-parser": "^1.19.0",
-    "@types/express": "^4.17.8",
-    "ts-node": "^9.0.0",
-    "tsc": "^1.20150623.0",
-    "tslint": "^6.1.3",
-    "typescript": "^4.0.3"
-  },
   "dependencies": {
-    "@mikro-orm/core": "^4.2.3",
-    "@mikro-orm/sqlite": "^4.2.3",
+    "@mikro-orm/core": "^4.0.7",
+    "@mikro-orm/sqlite": "^4.0.7",
     "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
-    "nodemon": "^2.0.4"
+    "jsonwebtoken": "^8.5.1",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0"
+  },
+  "devDependencies": {
+    "@mikro-orm/cli": "^4.0.7",
+    "@types/express": "^4.17.8",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/jest": "^26.0.14",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/node": "^14.11.2",
+    "@types/passport": "^1.0.4",
+    "@types/passport-jwt": "^3.0.3",
+    "@types/supertest": "^2.0.10",
+    "cross-env": "^7.0.2",
+    "jest": "^26.5.2",
+    "nodemon": "^2.0.4",
+    "supertest": "^5.0.0",
+    "ts-jest": "^26.4.1",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
   },
   "mikro-orm": {
     "useTsNode": true,
