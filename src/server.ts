@@ -1,5 +1,7 @@
 import express from "express";
 import * as bodyParser from "body-parser";
+import mikroOrmConfig from "./mikro-orm.config"
+import {mikroorm} from "./mikroorm"
 
 const app = express();
 
@@ -11,6 +13,8 @@ app.use(
     },
   })
 );
+
+app.use(mikroorm(mikroOrmConfig))
 
 app.post("/", (req, res) => {
   console.log(req.body);
