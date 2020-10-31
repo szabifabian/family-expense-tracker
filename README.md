@@ -36,19 +36,19 @@ A projekt célja a családi költségek nyomon követése, naplózása. A felhas
   
 ### Adatbázis felépítése
 
-- **Felhasználók tábla**  (név, jelszó, e-mail cím, egyedi azonosító )
-- **Meghívás tábla** (meghívó, meghívott, státusz)
-- **Családok tábla** (család_id )
-- **Család tábla** (felhasználó_id, szerep )
-- **Költségek** (költség_id, típus, összeg, cím, leírás)  
-- **Család Költségek kapcsolótábla** (felhasználó_id, költség_id )
+- **User tábla**  (username, email, password, unique_code)
+- **Invitation tábla** (invited_user, status, invited_by_id)
+- **Family tábla** (family_name)
+- **FamilyMember tábla** (role, user_id, family_id)
+- **Balance tábla** (title, type, amount, about)  
+- **Balance_FamilyMember kapcsolótábla** (balance_id, family_member_id)
   
 ### Objektumok közötti reláció  
   
-- **felhasználó - család**  (1 <-> N)
-- **családok - család**  (1<->n)
-- **család - költségek**  (n<->n)
-- **felhasználó - meghívás** (1<->n)
+- **User - FamilyMember**  (1 <-> N)
+- **Family - FamilyMember**  (1<->n)
+- **FamilyMember - Balance**  (n<->n)
+- **User - Invitation** (1<->n)
 
 ## Feladat nem funkcionális követelményei  
   

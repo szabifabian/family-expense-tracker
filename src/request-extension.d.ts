@@ -1,19 +1,37 @@
 import { EntityRepository, MikroORM, IDatabaseDriver } from "@mikro-orm/core";
-import { Issue } from "./entities/issue";
-import { User as ApplicationUser, UserRole } from "./entities/user";
+import { FamilyRole } from "./entities/familymember";
+import { User as ApplicationUser } from "./entities/user";
 
 declare global {
   namespace Express {
 
     interface User {
       id: number;
-      role: UserRole;
+    }
+
+    interface FamilyMember {
+      id: number;
+    }
+
+    interface Family {
+      id: number;
+    }
+
+    interface Balance {
+      id: number;
+    }
+
+    interface Invitation {
+      id: number;
     }
 
     interface Request {
       orm: MikroORM<IDatabaseDriver>;
-      issuesRepository?: EntityRepository<Issue>;
       userRepository?: EntityRepository<ApplicationUser>;
+      familymemberRepository?: EntityRepository<FamilyMember>;
+      familyRepository?: EntityRepository<Family>;
+      balanceRepository?: EntityRepository<Balance>;
+      invitationRepository?: EntityRepository<Invitation>;
     }
   }
 }
