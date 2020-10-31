@@ -17,11 +17,21 @@ declare global {
       id: number;
     }
 
+    interface Balance {
+      id: number;
+    }
+
+    interface Invitation {
+      id: number;
+    }
+
     interface Request {
       orm: MikroORM<IDatabaseDriver>;
       userRepository?: EntityRepository<ApplicationUser>;
       familymemberRepository?: EntityRepository<FamilyMember>;
       familyRepository?: EntityRepository<Family>;
+      balanceRepository?: EntityRepository<Balance>;
+      invitationRepository?: EntityRepository<Invitation>;
     }
   }
 }

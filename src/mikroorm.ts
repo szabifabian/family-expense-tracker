@@ -15,8 +15,8 @@ export function mikroorm(
   return async (req, res, next) => {
     if (!orm) {
       orm = await MikroORM.init(config);
-      req.orm = orm;
     }
+    req.orm = orm;
     RequestContext.create(orm.em, next);
   };
 }

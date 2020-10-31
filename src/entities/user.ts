@@ -1,5 +1,6 @@
 import { Collection, Entity, ManyToOne, OneToMany, PrimaryKey, Property } from "@mikro-orm/core";
 import { FamilyMember } from "./familymember";
+import { Invitation } from "./invitation";
 
 @Entity()
 export class User {
@@ -17,7 +18,7 @@ export class User {
   password!: string;
 
   @Property()
-  unique_code!: string; //could be 3letters-3numbers (ex:ABC123)
+  unique_code!: string; //(ex:ABC123)
 
   @Property()
   createdAt = new Date();
@@ -26,6 +27,9 @@ export class User {
   updatedAt = new Date();
 
   @OneToMany(() => FamilyMember, familymember => familymember.user)
-  familymambers = new Collection<FamilyMember>(this);
+  familymembers = new Collection<FamilyMember>(this);
+
+  @OneToMany(() => Invitation, invitation => invitation.invitedBy)
+  invitations = new Collection<Invitation>(this);
 
 }

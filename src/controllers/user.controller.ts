@@ -11,7 +11,7 @@ userRouter
     })
     /**TODO: Authentication, hashPassword -> security/password-utils.ts*/
     .post('/register', async (req, res) => {
-        const {username, password, unique_code, email} = req.body;
+        const {username, password, unique_code, email} = req.body; //unique_code & username has to be unique
         
         let user = new User();
         wrap(user).assign({username, email, password, unique_code});

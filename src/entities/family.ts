@@ -11,6 +11,6 @@ export class Family{
     family_name!: string;
 
     @OneToMany(() => FamilyMember, familymember => familymember.family)
-    familymambers = new Collection<FamilyMember>(this);
+    familymembers = new Collection<FamilyMember>(this);
 
 }

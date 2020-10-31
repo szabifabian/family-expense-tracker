@@ -1,6 +1,6 @@
 import express from "express";
 import * as bodyParser from "body-parser";
-import mikroOrmConfig from "./mikro-orm.config"
+import ormConfig from './mikro-orm.config';
 import {mikroorm} from "./mikroorm"
 import { routes } from "./controllers";
 
@@ -15,7 +15,7 @@ app.use(
   })
 );
 
-app.use(mikroorm(mikroOrmConfig))
+app.use(mikroorm(ormConfig))
 
 app.use(routes)
 
