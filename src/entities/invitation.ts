@@ -15,6 +15,12 @@ export class Invitation{
 
     @Property()
     status!: Status;
+
+    @Property()
+    createdAt = new Date();
+  
+    @Property({ onUpdate: () => new Date() })
+    updatedAt = new Date();
 }
 
 export enum Status {

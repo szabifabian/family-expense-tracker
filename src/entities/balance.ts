@@ -23,6 +23,12 @@ export class Balance{
     @ManyToMany(() => FamilyMember, 'balances', { owner: true })
     familymembers = new Collection<FamilyMember>(this);
 
+    @Property()
+    createdAt = new Date();
+  
+    @Property({ onUpdate: () => new Date() })
+    updatedAt = new Date();
+
 }
 
 export enum BalanceType {
