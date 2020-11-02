@@ -8,9 +8,15 @@ export class Family{
     id!: number;
 
     @Property()
-    family_name!: string;
+    family_name?: string; 
 
     @OneToMany(() => FamilyMember, familymember => familymember.family)
     familymembers = new Collection<FamilyMember>(this);
+
+    @Property()
+    createdAt = new Date();
+  
+    @Property({ onUpdate: () => new Date() })
+    updatedAt = new Date();
 
 }

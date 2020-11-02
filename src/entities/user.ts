@@ -18,7 +18,7 @@ export class User {
   password!: string;
 
   @Property()
-  unique_code!: string; //(ex:ABC123)
+  unique_code!: string; //(ex:ABC123) use uuidv4
 
   @Property()
   createdAt = new Date();
