@@ -1,6 +1,7 @@
 import { Collection, Entity, ManyToOne, OneToMany, PrimaryKey, Property } from "@mikro-orm/core";
 import { FamilyMember } from "./familymember";
 import { Invitation } from "./invitation";
+import { uuid } from 'uuidv4';
 
 @Entity()
 export class User {
@@ -18,7 +19,7 @@ export class User {
   password!: string;
 
   @Property()
-  unique_code!: string; //(ex:ABC123) use uuidv4
+  unique_code = uuid();
 
   @Property()
   createdAt = new Date();
