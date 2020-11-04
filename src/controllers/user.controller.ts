@@ -2,6 +2,7 @@ import { wrap } from "@mikro-orm/core";
 import { Router } from "express";
 import { User } from "../entities/user";
 import { hashPassword } from "../security/password-utils";
+import { generateJwt } from '../security/jwtGenerator';
 
 export const userRouter = Router();
 
@@ -28,8 +29,25 @@ userRouter
     await req.userRepository!.persistAndFlush(user);
     return res.sendStatus(200);
   })
+  .post("/login", async (req, res) => {
+    const { username, password }: AuthenticationDto = req.body;
+    const user = await req.userRepository!.findOne({ username });
+    if (!user) {
+      return res.sendStatus(401);
+    }
+    const hashedPassword = await hashPassword(password);
+    if (hashedPassword !== user.password) {
+      return res.sendStatus(401);
+    }
+    return res.send(generateJwt(user));
+  })
   /**For testing purposes: */
   .get("/", async (req, res) => {
     const users = await req.userRepository!.findAll();
     res.send(users);
   });
+
+interface AuthenticationDto {
+  username: string;
+  password: string;
+}
