@@ -1,7 +1,7 @@
 import { app } from '../src/server';
 import supertest from 'supertest';
 
-describe('Family Expense Tracker', () => {
+describe('Family Expense Tracker App', () => {
   const user = { username: 'csongor', email: 'test@gmail.com', password: '12345678' };
 
   let requestHandle: supertest.SuperTest<supertest.Test>;
