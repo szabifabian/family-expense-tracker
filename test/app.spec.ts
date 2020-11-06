@@ -2,7 +2,7 @@ import { app } from '../src/server';
 import supertest from 'supertest';
 
 describe('Family Expense Tracker App', () => {
-  const user = { username: 'csongor', email: 'csongor@gmail.com', password: 'password' };
+  const user = { username: 'csongor', email: 'csongor@gmail.com', password: 'password12345678' };
 
   let requestHandle: supertest.SuperTest<supertest.Test>;
 
