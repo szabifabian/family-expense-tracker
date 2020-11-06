@@ -13,4 +13,4 @@ jobs:
       api_key:
         secure: "UNjlrvX+8yrXMC4sgH/5U9p9bAAg1BUPHAIo8rgtyyxFa9VVde12xQpfRoOi5znSms2JOf6bakY/p7OIjZtGSvUblE7UHHNyyRA6XBO8znpbRlA04Xf2fX2Sp9FzUm6ZWIq1/Ejrrk1pXu2MQ+wJIiwsiphDA4gIyf5qHdgGwxERLOfYCI5MG+ndSdkerdAgzDahKUd9cCz9BgtzhbYYXX5VgKJQ5hwQoMDSbHZ3R5xk9ApXQKVby+ZLobUQghvTjt0A8mRU+/P0rNUizZglwUaNivINQaImTKrG5CPjLCfP7c0fVpb6vEz5+j22EX3PFNw6o6Smfe6lILS+KtR8uCbK+h9zFuEVXoz5XnApVd3LGuoelJYXMvRcfI3B3Tj/Qkqptu3N2dO8Bh1ibrP0KTehb1Ai33YkcylCzqB/4kiQ/afsJN9sflypUaI9GhY/jCQQkIT2K9+J26+GKblo+cUpT32NRib9LizpQcpvU5Z3wO3UoEt58lvf5dVzGyJTS3SuU2Lvmv603lIMFM1pl1tzsWtwthqdSlqQF2lih+HGL70kO0Mm6uuApSli10yuTlrwEOuiXCpDkRStGVXeuRKWwip2I8MmUdYBNllDvXJp14689w9u84l1cGQrStQPTvWBCcLg92PwMed3LoEZNoKHQGsKNeslg2fNZbKALsk="
       app: family-expense-tracker
-    on: main
+      on: main
