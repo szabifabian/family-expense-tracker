@@ -1,0 +1,16 @@
+jobs:
+  include:
+
+  - language: node_js
+    node_js: node
+    cache:
+      directories:
+        - node_modules
+    after_success: npm build
+    deploy:
+      skip_cleanup: true
+      provider: heroku
+      api_key:
+        secure: "S8dmxRqK0BwgoCHl87hAzg52A6wlMr1Vk6dgTb+UF25CjYOF1e4pj/uqso18pdTyKA2QigUdnVOrtxSnlDovYmwd1d4Kvsxm5lwaAXur074FHXj47SVmKYyrMBmoU424618vQCiVFBeiu8+xGmt9rWXYX4gNbqDjUCs1BE7BbPmlbEpqIwoxLYDHBopA1zl5a9U1QzX+XvAgEtu7i2VazWFxlMJbrQOiHVKphnVFEzDO1Bw1zn3oksZqvhpKH5TEkh5ny9gLv6c4VwWLnZjD7NX5woMB+uDlieAeQo6vxWngMQP+oPeUTkFQlI51SXEEv9VmDuqNz2laBocGJz7d2f6I/oDfInNenM8KY6vptR28EslXsteILaAj/xGrqxCKAsFTT66ZUuyWPYZ1mm6bleFdSvmbjHpZHrPjJMC20Y10RjoC1N4NYvzKCA4QiWlaMVy7hXddhAQ6vPUqXda/1K0JIp1/BV1O+3+FYHvdJga/cWOIKFsXemQaaaRBZsO3oy+mvr60DB3DsZLYjVjQHcPcvfqW7Z6dJrYlnK0vsXj0Q3A56CcgdRtkifsW+mlmEQE7gt0J6f2uH8x0+WyncicYfmePC3OUYQCv63IjyOOa6x7SFJkn8lNK7te0hw7sBZi1EjelPVCEYK64QqcAvhlOjDxDHwuVzq69STIH/+M="
+      app: family-expense-tracker
+    on: main
