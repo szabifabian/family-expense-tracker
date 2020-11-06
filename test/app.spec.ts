@@ -10,7 +10,7 @@ describe('Expense Tracker', () => {
     requestHandle = supertest(app);
   });
 
-  describe('Authentication', () => {
+  describe('authentication', () => {
     it('should register', async () => {
       await requestHandle.post('/user/register').send(user).expect(200);
     });
