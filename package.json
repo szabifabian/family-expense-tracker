@@ -8,7 +8,8 @@
     "dev": "nodemon src/index.ts",
     "build": "tsc --project ./src --outDir dist",
     "test": "cross-env NODE_ENV=test jest --forceExit",
-    "pretest": "cross-env NODE_ENV=test npm run create:db",
+    "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
+    "pretest": "cross-env NODE_ENV=test npm run create:db && cross-env NODE_ENV=test mikro-orm database:import test/seed.sql",
     "create:db": "mikro-orm schema:drop -r && mikro-orm schema:create -r"
   },
   "keywords": [],
@@ -35,6 +36,7 @@
     "@types/passport": "^1.0.4",
     "@types/passport-jwt": "^3.0.3",
     "@types/supertest": "^2.0.10",
+    "coveralls": "^3.1.0",
     "cross-env": "^7.0.2",
     "jest": "^26.6.1",
     "nodemon": "^2.0.6",
