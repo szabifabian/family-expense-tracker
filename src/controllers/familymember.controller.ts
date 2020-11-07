@@ -33,15 +33,35 @@ familyMemberRouter
             return res.sendStatus(201);
         }
     })
-    //get familymembers of a family
+    //get familymembers of your family
     .get('/:familyId/members', async (req, res) => {
+        const loggedInUserId = (req.user!.id);
         const familyId = parseInt(req.params.familyId);
-        let family = await req.familyRepository!.findOne({id: familyId});
-        if(!family){
-            return res.sendStatus(404);
+        const memberOfTheFamily = await req.familymemberRepository!.findOne({user: loggedInUserId, family: familyId});
+        if (!memberOfTheFamily){ //not member of the family
+            return res.sendStatus(403); //forbidden
         }
         const members = await req.familymemberRepository!.find(
             {family: familyId}
         );
         res.send(members);
     })
+    //delete a familymember (you have to be the admin of family)
+    .delete('/delete/:deleteUser', async(req, res) => {
+        const loggedInUserId = (req.user!.id);
+        const deleteUser = parseInt(req.params.deleteUser);
+        //check whether you are admin
+        let adminFamilyMember = await req.familymemberRepository!.findOne({user: loggedInUserId, role: FamilyRole.Admin});
+        if(!adminFamilyMember){
+            return res.sendStatus(403);
+        }
+        //user you want to delete is member of your family
+        let wantToDelete = await req.familymemberRepository!.findOne({user: deleteUser, family: adminFamilyMember.family})
+        if(!wantToDelete){
+            return res.sendStatus(403);
+        }else{
+            await req.familymemberRepository!.nativeDelete({user: wantToDelete.user});
+            return res.sendStatus(200);
+        }
+    })
+    
