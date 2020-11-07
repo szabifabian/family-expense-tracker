@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { passport } from "../security/passport";
+import { balanceRouter } from "./balance.controller";
 import { familyRouter } from "./family.controller";
 import { familyMemberRouter } from "./familymember.controller";
 import { invitationRouter } from "./invitation.controller";
@@ -11,3 +12,4 @@ routes.use('/user', userRouter);
 routes.use('/familymember',passport.authenticate('jwt', { session: false }), familyMemberRouter);
 routes.use('/family', passport.authenticate('jwt', { session: false }), familyRouter);
 routes.use('/invitation', passport.authenticate('jwt', { session: false }), invitationRouter);
+routes.use('/balance', passport.authenticate('jwt', { session: false }), balanceRouter);
