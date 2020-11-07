@@ -21,6 +21,17 @@ balanceRouter
     let expenses = await req.balanceRepository!.find({familymembers:{id: familyMembers?.id}});
     res.send(expenses);
   })
+  .get("/:expenseId", async (req, res) => {
+    const loggedInUserId = req.user!.id;
+    const expenseId = parseInt(req.params.expenseId);
+    let familyMembers = await req.familymemberRepository!.findOne({user: loggedInUserId, balances:{id:expenseId}});
+    let expense = await req.balanceRepository!.findOne({familymembers:{id: familyMembers?.id}});
+    if(!expense) {
+        res.send(403);
+    } else {
+        res.send(expense);
+    }
+  })
   .post("/add", async (req, res) => {
     const loggedInUserId = req.user!.id;
     let familyMember = await req.familymemberRepository!.findOne({
@@ -35,6 +46,26 @@ balanceRouter
       res.sendStatus(200);
     } else {
       res.sendStatus(402);
+    }
+  })
+  .put("/edit/:expenseId", async (req, res) => {
+    const loggedInUserId = req.user!.id;
+    const expenseId = parseInt(req.params.expenseId);
+    let familyMembers = await req.familymemberRepository!.findOne({user: loggedInUserId, balances:{id:expenseId}});
+    let expense = await req.balanceRepository!.findOne({familymembers:{id: familyMembers?.id}});
+
+    const editedExpense = {
+        "title": req.body.title ? req.body.title : expense?.title,
+        "type": req.body.type ? req.body.type : expense?.type,
+        "amount": req.body.amount ? req.body.amount : expense?.amount,
+        "about": req.body.about ? req.body.about : expense?.about,
+    }
+
+    if(!expense) {
+        res.send(403);
+    } else {
+        await req.balanceRepository?.nativeUpdate({id:expenseId},editedExpense);
+        res.sendStatus(200);
     }
   })
   .delete("/delete/:expenseId", async (req, res) => {
