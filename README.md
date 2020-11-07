@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.com/szabifabian/family-expense-tracker.svg?branch=master)](https://travis-ci.com/szabifabian/family-expense-tracker)
 
-# Családi büdzsékezelő alkalmazás
+
+# Családi büdzsékezelő alkalmazás [![Build Status](https://travis-ci.com/szabifabian/family-expense-tracker.svg?branch=master)](https://travis-ci.com/szabifabian/family-expense-tracker)
 
 ## Feladat funkcionális követelményei
 
