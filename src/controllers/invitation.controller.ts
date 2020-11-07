@@ -45,18 +45,47 @@ invitationRouter
 
     .put('/accept/:from', async (req, res) =>{
         const loggedInUserId = req.user!.id;
-        const from = parseInt(req.params.from);
+        const from = parseInt(req.params.from); //invited_by_id
 
         let alreadyFamilyMember = await req.familymemberRepository!.findOne({user: loggedInUserId})
-        if(alreadyFamilyMember){
+        if(alreadyFamilyMember){ //you are already a family member
             return res.sendStatus(403);
         }else{
             let user = await req.userRepository!.findOne({id: loggedInUserId});
-            await req.invitationRepository!.nativeUpdate({invited_user: user!.username, status: Status.Pending, invitedBy: from}, {status: Status.Accepted});
+            const pendingInvitations = await req.invitationRepository!.find({invited_user: user!.username, status: Status.Pending})
+            if(pendingInvitations.length === 0){ //you don't have invitations
+                return res.sendStatus(404);
+            }else{
+                const invitationFrom = await req.familymemberRepository!.findOne({user: from});
+                if(!invitationFrom){ //you don't have invitation from this user
+                    return res.sendStatus(404);
+                }else{
+                    await req.invitationRepository!.nativeUpdate({invited_user: user!.username, status: Status.Pending, invitedBy: from}, {status: Status.Accepted});
+                    let newFamilyMember = new FamilyMember();
+                    wrap(newFamilyMember).assign({role: FamilyRole.User, user: loggedInUserId, family: invitationFrom!.family}, {em: req.orm.em});
+                    await req.familymemberRepository!.persistAndFlush(newFamilyMember);
+                    return res.sendStatus(200);
+                }
+            }
+        }
+    })
+
+    //decline an invitation
+    .put('/decline/:from', async (req, res) => {
+        const loggedInUserId = req.user!.id;
+        const from = parseInt(req.params.from); //invited_by_id
+        let user = await req.userRepository!.findOne({id: loggedInUserId});
+
+        const pendingInvitations = await req.invitationRepository!.find({invited_user: user!.username, status: Status.Pending})
+        if(pendingInvitations.length === 0){ //you don't have invitations
+            return res.sendStatus(404);
+        }else{
             const invitationFrom = await req.familymemberRepository!.findOne({user: from});
-            let newFamilyMember = new FamilyMember();
-            wrap(newFamilyMember).assign({role: FamilyRole.User, user: loggedInUserId, family: invitationFrom!.family}, {em: req.orm.em});
-            await req.familymemberRepository!.persistAndFlush(newFamilyMember);
-            return res.sendStatus(200);
+            if(!invitationFrom){ //you don't have invitation from this user
+                return res.sendStatus(404);
+            }else{
+                await req.invitationRepository!.nativeUpdate({invited_user: user!.username, status: Status.Pending, invitedBy: from}, {status: Status.Declined});
+                return res.sendStatus(200);
+            }
         }
     })
