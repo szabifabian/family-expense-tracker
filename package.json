@@ -8,7 +8,7 @@
     "dev": "nodemon src/index.ts",
     "build": "tsc --project ./src --outDir dist",
     "test": "cross-env NODE_ENV=test jest --forceExit",
-    "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
+    "coverage": "npm run pretest && jest --coverage && cat ./coverage/lcov.info | coveralls",
     "pretest": "cross-env NODE_ENV=test npm run create:db && cross-env NODE_ENV=test mikro-orm database:import test/seed.sql",
     "create:db": "mikro-orm schema:drop -r && mikro-orm schema:create -r"
   },
