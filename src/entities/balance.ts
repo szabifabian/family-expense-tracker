@@ -1,4 +1,4 @@
-import { Collection, Entity, ManyToMany, PrimaryKey, Property } from "@mikro-orm/core";
+import { Cascade, Collection, Entity, ManyToMany, PrimaryKey, Property } from "@mikro-orm/core";
 import { Family } from "./family";
 import { FamilyMember } from "./familymember";
 
@@ -20,7 +20,7 @@ export class Balance{
     @Property()
     about?: string;
 
-    @ManyToMany(() => FamilyMember, 'balances', { owner: true })
+    @ManyToMany(() => FamilyMember, 'balances', { owner: true, cascade: [Cascade.ALL] })
     familymembers = new Collection<FamilyMember>(this);
 
     @Property()

@@ -19,11 +19,6 @@ app.use(mikroorm(ormConfig))
 
 app.use(routes)
 
-/*app.post("/", (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
-});*/
-
 app.get("/", (req, res) => {
   req.body = {
     "name": "Hello world"
