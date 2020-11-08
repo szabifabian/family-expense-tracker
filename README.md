@@ -17,6 +17,8 @@ A projekt célja a családi költségek nyomon követése, naplózása. A felhas
 - SQLite  
 - REST api  (Frotend - Backend kommunikáció)
 
+[Backend dokumentáció](https://github.com/szabifabian/family-expense-tracker/wiki/Backend-dokument%C3%A1ci%C3%B3)
+
 #### Frontend
 - Angular (Frontend)
 
