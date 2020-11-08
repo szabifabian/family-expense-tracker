@@ -89,3 +89,17 @@ invitationRouter
             }
         }
     })
+
+    //list user's pending invitations
+    .get('/pendings', async (req, res) => {
+        const loggedInUserId = req.user!.id;
+
+        let alreadyFamilyMember = await req.familymemberRepository!.findOne({user: loggedInUserId});
+        let user = await req.userRepository!.findOne({id: loggedInUserId});
+        if(alreadyFamilyMember){ //you are already a family member
+            return res.sendStatus(403);
+        }else{
+            const pendingInvitations = await req.invitationRepository!.find({invited_user: user!.username, status: Status.Pending});
+            return res.send(pendingInvitations);
+        }
+    })
