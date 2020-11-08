@@ -17,7 +17,7 @@ familyRouter
         const {family_name} = req.body;
 
         let familyMember = await req.familymemberRepository!.findOne({user: loggedInUser});
-        if(familyMember!.role === FamilyRole.Admin && familyMember!.user.id === loggedInUser){
+        if(familyMember && familyMember!.role === FamilyRole.Admin && familyMember!.user.id === loggedInUser){
             let family_id = familyMember!.family.id;
             await req.familyRepository!.nativeUpdate({id: family_id}, {family_name: family_name});
             return res.sendStatus(201);

@@ -1,9 +1,18 @@
-import { app } from '../src/server';
-import supertest from 'supertest';
+import { app } from "../src/server";
+import supertest from "supertest";
+import { MikroORM } from "@mikro-orm/core";
 
-describe('Family Expense Tracker App', () => {
-  const user = { username: 'csongor', email: 'csongor@gmail.com', password: 'password12345678' };
-  const user2 = { username: 'felhasználó 1', email: 'felhasznalo1@gmail.com', password: 'felhasznalo1' };
+describe("Family Expense Tracker App", () => {
+  const user = {
+    username: "csongor",
+    email: "csongor@gmail.com",
+    password: "password12345678",
+  };
+  const user2 = {
+    username: "felhasználó 1",
+    email: "felhasznalo1@gmail.com",
+    password: "felhasznalo1",
+  };
 
   let requestHandle: supertest.SuperTest<supertest.Test>;
 
@@ -14,67 +23,220 @@ describe('Family Expense Tracker App', () => {
     requestHandle = supertest(app);
   });
 
-
-  describe('Authentication', () => {
-    it('should register', async () => {
-      await requestHandle.post('/user/register').send(user).expect(200);
+  describe("Authentication", () => {
+    it("should register", async () => {
+      await requestHandle.post("/user/register").send(user).expect(200);
     });
 
-    it('should fail on same user registration', async () => {
-      await requestHandle.post('/user/register').send(user).expect(409);
+    it("should fail on same user registration", async () => {
+      await requestHandle.post("/user/register").send(user).expect(409);
     });
 
-    it('should login with registered user', async () => {
-      await requestHandle.post('/user/login').send(user).expect(200);
+    it("should login with registered user", async () => {
+      await requestHandle.post("/user/login").send(user).expect(200);
     });
   });
 
   beforeEach(async () => {
-    const loginResponse = await requestHandle.post('/user/login').send(user);
-    const user2LoginResponse = await requestHandle.post('/user/login').send(user2);
+    const loginResponse = await requestHandle.post("/user/login").send(user);
+    const user2LoginResponse = await requestHandle
+      .post("/user/login")
+      .send(user2);
     token = `Bearer ${loginResponse.text}`;
     user2Token = `Bearer ${user2LoginResponse.text}`;
   });
 
-  describe('Create family', () => {
-
-    it('should create a new family', async () => {
-      await requestHandle.post('/familymember/create').set('Authorization', token).expect(201);
+  describe("Create family", () => {
+    it("should create a new family", async () => {
+      await requestHandle
+        .post("/familymember/create")
+        .set("Authorization", token)
+        .expect(201);
     });
 
-    it('shouldn\'t create a new family for second time ', async () => {
-      await requestHandle.post('/familymember/create').set('Authorization', token).expect(409);
+    it("shouldn't create a new family for second time ", async () => {
+      await requestHandle
+        .post("/familymember/create")
+        .set("Authorization", token)
+        .expect(409);
     });
 
-    it('shouldn\'t create a new family without a token', async () => {
-      await requestHandle.post('/familymember/create').expect(401);
+    it("shouldn't create a new family without a token", async () => {
+      await requestHandle.post("/familymember/create").expect(401);
     });
-  }); 
+  });
 
-  describe('Invite to a family', () => {
-
+  describe("Invite to a family", () => {
     const invitation = {
-      "invited_user": "1"
+      invited_user: "1",
+    };
+
+    it("should send an invitation to an existing user without a family", async () => {
+      await requestHandle
+        .post("/invitation/send")
+        .set("Authorization", token)
+        .send(invitation)
+        .expect(200);
+    });
+
+    it("should accept invitation the invited user", async () => {
+      await requestHandle
+        .put("/invitation/accept/4")
+        .set("Authorization", user2Token)
+        .expect(200);
+    });
+
+    it("shouldn't accept invitation the invited user for second time", async () => {
+      await requestHandle
+        .put("/invitation/accept/4")
+        .set("Authorization", user2Token)
+        .expect(403);
+    });
+
+    it("shouldn't accept non-existing invitation", async () => {
+      await requestHandle
+        .put("/invitation/accept/5")
+        .set("Authorization", user2Token)
+        .expect(403);
+    });
+
+    it("shouldn't accept invitation without a token", async () => {
+      await requestHandle.put("/invitation/accept/5").expect(401);
+    });
+  });
+
+  describe("Get family members list", () => {
+    it("shouldn't get other family member list", async () => {
+      await requestHandle
+        .get("/familymember/1/members")
+        .set("Authorization", token)
+        .expect(403);
+    });
+
+    it("should get your family members", async () => {
+      await requestHandle
+        .get("/familymember/2/members")
+        .set("Authorization", token)
+        .expect(200);
+    });
+  });
+
+  describe("Delete a family member", () => {
+    it("shouldn't delete if user is not admin", async () => {
+      await requestHandle
+        .delete("/familymember/delete/1")
+        .set("Authorization", user2Token)
+        .expect(403);
+    });
+
+    it("shouldn't delete if user not in family", async () => {
+      await requestHandle
+        .delete("/familymember/delete/2")
+        .set("Authorization", user2Token)
+        .expect(403);
+    });
+
+    it("should delete if you are the admin", async () => {
+      await requestHandle
+        .delete("/familymember/delete/1")
+        .set("Authorization", token)
+        .expect(200);
+    });
+  });
+
+  describe("Edit family name", () => {
+    const data = {
+      family_name: "New name",
+    };
+
+    it("shouldn't edit if you are not admin", async () => {
+      await requestHandle
+        .put("/family/edit/name")
+        .set("Authorization", user2Token)
+        .send(data)
+        .expect(402);
+    });
+
+    it("should edit if you are admin", async () => {
+      await requestHandle
+        .put("/family/edit/name")
+        .set("Authorization", token)
+        .send(data)
+        .expect(201);
+    });
+  });
+
+  describe("Balance", () => {
+    const data = {
+      title: "teszt1",
+      type: "EXPENSE",
+      amount: "100",
+      about: "kiadás",
+    };
+
+    const data2 = {
+      title: "new expense"
     }
 
-    it('should send an invitation to an existing user without a family', async () => {
-      await requestHandle.post('/invitation/send').set('Authorization', token).send(invitation).expect(200);
+    it("should add a new expense", async () => {
+      await requestHandle
+        .post("/balance/add")
+        .set("Authorization", token)
+        .send(data)
+        .expect(200);
     });
 
-    it('should accept invitation the invited user', async () => {
-      await requestHandle.put('/invitation/accept/4').set('Authorization', user2Token).expect(200);
+    it("should add a new expense", async () => {
+      await requestHandle
+        .post("/balance/add")
+        .set("Authorization", token)
+        .send(data)
+        .expect(200);
     });
 
-    it('shouldn\'t accept invitation the invited user for second time', async () => {
-      await requestHandle.put('/invitation/accept/4').set('Authorization', user2Token).expect(403);
+    it("shouldn't delete a non existing expense", async () => {
+      await requestHandle
+        .delete("/balance/delete/8")
+        .set("Authorization", token)
+        .expect(404);
     });
 
-    it('shouldn\'t accept non-existing invitation', async () => {
-      await requestHandle.put('/invitation/accept/5').set('Authorization', user2Token).expect(403);
+    it("should delete an existing expense", async () => {
+      await requestHandle
+        .delete("/balance/delete/1")
+        .set("Authorization", token)
+        .expect(200);
     });
 
-    it('shouldn\'t accept invitation without a token', async () => {
-      await requestHandle.put('/invitation/accept/5').expect(401);
+    it("should get the expense from your family", async () => {
+      await requestHandle
+        .get("/balance/1")
+        .set("Authorization", token)
+        .expect(200);
     });
-  }); 
+
+    it("shouldn't get a non existing expense", async () => {
+      await requestHandle
+        .get("/balance/3")
+        .set("Authorization", token)
+        .expect(403);
+    });
+
+    it("should edit the expense from your family", async () => {
+      await requestHandle
+        .put("/balance/edit/1")
+        .set("Authorization", token)
+        .send(data2)
+        .expect(200);
+    });
+
+    it("shouldn't edit a non-existing expense", async () => {
+      await requestHandle
+        .put("/balance/edit/5")
+        .set("Authorization", token)
+        .send(data2)
+        .expect(403);
+    });
+
+  });
 });
