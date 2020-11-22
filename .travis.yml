@@ -6,6 +6,7 @@ jobs:
     cache:
       directories:
         - node_modules
+    before_install: cd server-family-expense-tracker
     after_success:
       - npm build
     deploy:
