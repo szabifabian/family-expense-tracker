@@ -1,17 +1,14 @@
-<mat-toolbar color="primary">
+  <mat-toolbar color="primary">
 	<mat-toolbar-row>
 		<button class="menu primary" mat-icon-button (click)="drawer.toggle()" matTooltip="Főmenü">
 			<mat-icon>menu</mat-icon>
 		</button>
-		<span style="margin: 0 0 0 15px;">MyIssue</span>
+		<span style="margin: 0 0 0 15px;">Family Expense Tracker</span>
 	</mat-toolbar-row>
 </mat-toolbar>
 <mat-drawer-container fullscreen>
-	<mat-drawer #drawer mode="side" opened>
-    <ul>
-      <li><span routerLink="/" routerLinkActive="active">Expenses</span></li>
-      <li><span routerLink="/settings" routerLinkActive="active">Settings</span></li>
-    </ul>
+	<mat-drawer #drawer mode="side">
+		<app-menu></app-menu>
 	</mat-drawer>
 	<mat-drawer-content>
 		<main>
