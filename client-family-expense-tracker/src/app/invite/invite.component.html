@@ -1,1 +1,11 @@
-<p>invite works!</p>
+<h1>Invite a new member to your family!</h1>
+
+<div class="example-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Enter the unique code</mat-label>
+      <input matInput placeholder="user's unique code" [formControl]="user_code" required>
+      <mat-error *ngIf="user_code.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+</div>
+<br>
+<button mat-raised-button>Add user</button>

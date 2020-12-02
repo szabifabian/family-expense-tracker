@@ -1,0 +1,11 @@
+@import "../../assets/styles/variables.scss";
+
+table {
+    width: 100%;
+    border: 0.4em solid;
+    border-color: $mi-bg3;
+  }
+
+th {
+    font-size: large;
+}

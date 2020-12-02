@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FamilymemberService } from '../core/services/familymember.service';
 
 @Component({
   selector: 'app-family',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./family.component.scss']
 })
 export class FamilyComponent implements OnInit {
+  displayedColumns: string[] = ['name', 'role', 'amount'];
 
-  constructor() { }
+  constructor(public members: FamilymemberService) { }
 
   ngOnInit(): void {
   }

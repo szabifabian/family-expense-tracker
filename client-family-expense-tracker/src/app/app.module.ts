@@ -10,16 +10,20 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import { SettingsComponent } from './settings/settings.component';
 import { MenuComponent } from './menu/menu.component';
 import { MatListModule } from '@angular/material/list';
 import { FamilyComponent } from './family/family.component';
 import { InviteComponent } from './invite/invite.component';
 import { ExpenseComponent } from './expenses/expense/expense.component';
 import { ProfileComponent } from './profile/profile.component';
+import { MatCardModule } from '@angular/material/card';
+import {MatTableModule} from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, ExpensesComponent, SettingsComponent, MenuComponent, FamilyComponent, InviteComponent, ExpenseComponent, ProfileComponent],
+  declarations: [AppComponent, ExpensesComponent, MenuComponent, FamilyComponent, InviteComponent, ExpenseComponent, ProfileComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,6 +33,12 @@ import { ProfileComponent } from './profile/profile.component';
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
+    MatCardModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    FormsModule,
     MatListModule
   ],
   providers: [],
