@@ -9,7 +9,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MenuComponent } from './menu/menu.component';
 import { MatListModule } from '@angular/material/list';
 import { FamilyComponent } from './family/family.component';
@@ -17,29 +17,52 @@ import { InviteComponent } from './invite/invite.component';
 import { ExpenseComponent } from './expenses/expense/expense.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MatCardModule } from '@angular/material/card';
-import {MatTableModule} from '@angular/material/table';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatRippleModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table'  
+
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, ExpensesComponent, MenuComponent, FamilyComponent, InviteComponent, ExpenseComponent, ProfileComponent],
+  declarations: [
+    AppComponent,
+    ExpensesComponent,
+    MenuComponent,
+    FamilyComponent,
+    InviteComponent,
+    ExpenseComponent,
+    ProfileComponent,
+    LoginComponent,
+  ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    MatExpansionModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
     MatCardModule,
-    MatTableModule,
-    MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatListModule
+    MatSelectModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatIconModule,
+    MatListModule,
+    MatRippleModule,
+    MatExpansionModule,
+    MatSnackBarModule,
+    AppRoutingModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent],

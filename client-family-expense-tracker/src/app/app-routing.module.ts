@@ -4,9 +4,11 @@ import { ExpensesComponent } from './expenses/expenses.component';
 import { FamilyComponent} from './family/family.component';
 import { InviteComponent} from './invite/invite.component';
 import { ProfileComponent } from './profile/profile.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'expenses', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'expenses',  component: ExpensesComponent },
   { path: 'family', component: FamilyComponent},
   { path: 'invite', component: InviteComponent},
