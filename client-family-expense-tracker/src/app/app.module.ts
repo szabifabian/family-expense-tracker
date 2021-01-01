@@ -29,6 +29,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table'  
 
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
     ExpenseComponent,
     ProfileComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatExpansionModule,
     MatSnackBarModule,
     AppRoutingModule,
-    MatTableModule
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -7,30 +7,46 @@ import { NotificationService } from './notification.service';
 import { User } from '../interfaces/user.interface';
 
 import { baseUrl } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   isLogin$ = new BehaviorSubject<boolean>(this.hasToken());
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': ''
+    })
+  };
 
   constructor(
     private http: HttpClient,
-    private ns : NotificationService
+    private ns : NotificationService,
+    private router: Router
   ) { }
+
+  register(user: User): void {
+    this.http.post<User>(`${baseUrl}/user/register`, user, this.httpOptions).subscribe(
+      data => {
+        console.log(data);
+        this.ns.show('Sikeres regisztráció!');
+        this.router.navigate(['/login']);
+      },
+      error => {
+        this.ns.show('HIBA! Regisztráció sikertelen!');
+        console.error(error);
+      }
+    );
+  }
 
   isLoggedIn(): Observable<boolean> {
     return this.isLogin$.asObservable();
   }
 
   login(user: User): void {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': ''
-      }),
-    }
-    this.http.post<User>(`${baseUrl}/login`, user, httpOptions).subscribe(
+    this.http.post<User>(`${baseUrl}/user/login`, user, this.httpOptions).subscribe(
       data => {
         console.log(data); // TODO: Use TOKEN from the data POST response.
         localStorage.setItem('token', 'A223wedw34w');

@@ -1,0 +1,60 @@
+<div fxLayoutAlign="center center" fxFlexFill>
+    <mat-card fxFlex="25">
+        <mat-toolbar color="primary">Regisztráció</mat-toolbar>
+        <form [formGroup]="registerForm" fxLayoutAlign="stretch" fxLayout="column" (ngSubmit)="register(registerForm)" [ngClass]="{'up': password.value.length > 0}" novalidate>
+            <mat-form-field>
+                <input
+                    matInput
+                    type="text"
+                    placeholder="Az Ön neve"
+                    formControlName="name"
+                    required
+                    appNameFormat
+                >
+                <mat-error>Mező kitöltése kötelező, minimum karakterszám: 5!</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input
+                    matInput
+                    type="email"
+                    placeholder="E-mail címe"
+                    formControlName="username"
+                    required
+                >
+                <mat-error>Adjon meg egy érvényes E-mail címet!</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input
+                    matInput
+                    #password
+                    type="password"
+                    placeholder="Jelszó"
+                    color="primary"
+                    formControlName="password"
+                    required
+                >
+                <mat-error>Jelszó legalább 30 karakter hosszú legyen!</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input
+                    matInput
+                    type="password"
+                    placeholder="Jelszó ismétlése"
+                    formControlName="passwordConfirm"
+                    required>
+                <mat-error>Megadott jelszavak nem azonosak!</mat-error>
+            </mat-form-field>
+            <br>
+            <button
+                mat-raised-button
+                color="primary"
+                style="margin:15px 0 0 0"
+            >
+                Regisztráció
+            </button>
+        </form>
+    </mat-card>
+</div>
