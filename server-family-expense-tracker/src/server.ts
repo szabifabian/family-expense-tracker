@@ -3,7 +3,7 @@ import * as bodyParser from "body-parser";
 import ormConfig from './mikro-orm.config';
 import {mikroorm} from "./mikroorm"
 import { routes } from "./controllers";
-import cors from 'cors';
+let cors = require('cors')
 
 const app = express();
 
