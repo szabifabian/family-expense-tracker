@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { ExpenseService } from './services/expense.service';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
 	declarations: [],
@@ -14,6 +15,7 @@ import { ExpenseService } from './services/expense.service';
 	],
 	providers: [
 		ExpenseService,
+		AuthService,
 	]
 })
 export class CoreModule { }
