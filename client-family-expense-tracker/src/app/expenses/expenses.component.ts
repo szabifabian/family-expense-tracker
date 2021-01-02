@@ -9,5 +9,7 @@ import { ExpenseService } from '../core/services/expense.service';
 export class ExpensesComponent implements OnInit {
   constructor(public is: ExpenseService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.is.getExpenses();
+  }
 }

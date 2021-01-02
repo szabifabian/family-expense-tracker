@@ -1,8 +1,7 @@
 export interface Expense {
-    eId: number;
-    uId: number;
-    type: 'HW' | 'SW';
-    details: string;
-    timestamp: number;
-    status: 'ADDED' | 'ASSIGNED' | 'DONE';
+    id: number;
+    title: number;
+    type: 'EXPENSE' | 'SW';
+    amount: number;
+    about: string;
 }

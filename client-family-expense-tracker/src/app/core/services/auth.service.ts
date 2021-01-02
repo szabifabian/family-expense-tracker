@@ -46,10 +46,9 @@ export class AuthService {
   }
 
   login(user: User): void {
-    this.http.post<User>(`${baseUrl}/user/login`, user, this.httpOptions).subscribe(
+    this.http.post<any>(`${baseUrl}/user/login`, user, this.httpOptions).subscribe(
       data => {
-        console.log(data); // TODO: Use TOKEN from the data POST response.
-        localStorage.setItem('token', 'A223wedw34w');
+        localStorage.setItem('token', data['token']);
         this.isLogin$.next(true);
         this.ns.show('Sikeres bejelentkezés!');
       },

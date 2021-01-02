@@ -1,20 +1,29 @@
 import { Injectable } from '@angular/core';
 
 import { Expense } from '../interfaces/expense.interface'
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { NotificationService } from '../services/notification.service';
+import { baseUrl } from 'src/environments/environment';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ExpenseService {
-    expenses: Expense[] = [
-        { eId: 1, uId: -1, type: 'SW', details: 'Első expense', timestamp: 1601024188, status: 'ADDED' },
-        { eId: 2, uId: -1, type: 'HW', details: 'Második expense', timestamp: 1601024188, status: 'ADDED' }
-    ];
+    expenses$ = new BehaviorSubject<Expense[]>([]);
 
-    constructor() {}
+    constructor(
+        private http: HttpClient,
+        private ns: NotificationService
+    ) {}
 
-    public getExpenses(): Expense [] {
-        return this.expenses;
+    getExpenses(): void {
+        const header = new HttpHeaders().set(
+            'Authorization', `Bearer ${localStorage.getItem('token')}`
+        );
+        this.http.get<Expense[]>(`${baseUrl}/balance`, {headers: header})
+            .subscribe(i => {
+                this.expenses$.next(i);
+            });
     }
-
 }
