@@ -20,8 +20,8 @@ export class RegisterComponent{
 		private ns: NotificationService
   ) {
     this.registerForm = this.formBuilder.group({
-			name: [null, [Validators.minLength(5), Validators.required]],
-			username: [null, [Validators.email, Validators.required]],
+			username: [null, [Validators.minLength(5), Validators.required]],
+			email: [null, [Validators.email, Validators.required]],
 			password: [null, [Validators.required, Validators.maxLength(30)]],
 			passwordConfirm: [null, Validators.required]
 		},
