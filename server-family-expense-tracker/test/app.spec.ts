@@ -42,8 +42,8 @@ describe("Family Expense Tracker App", () => {
     const user2LoginResponse = await requestHandle
       .post("/user/login")
       .send(user2);
-    token = `Bearer ${loginResponse.text}`;
-    user2Token = `Bearer ${user2LoginResponse.text}`;
+    token = `Bearer ${loginResponse.body.token}`;
+    user2Token = `Bearer ${user2LoginResponse.body.token}`;
   });
 
   describe("Create family", () => {
