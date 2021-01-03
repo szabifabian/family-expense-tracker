@@ -1,5 +1,5 @@
 <h1>Family members</h1>
-<div *ngIf="members.familymember$.getValue.length !== 0;else elseBlock">
+<div *ngIf="members.familymember$.value.length !== 0;else elseBlock">
   <table #thenBlock mat-table [dataSource]="members.familymember$" class="mat-elevation-z8">
 
       <ng-container matColumnDef="name">
