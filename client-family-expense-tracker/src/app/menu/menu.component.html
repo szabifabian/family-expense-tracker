@@ -1,17 +1,25 @@
 <mat-nav-list>
-    <mat-list-item routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" matRipple>
+	<mat-list-item *ngIf="!(isLoggedIn$ | async)" routerLink="/register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" matRipple>
+		<mat-icon mat-list-icon>person_add</mat-icon>
+		<h4 mat-line>Registration</h4>
+	</mat-list-item>
+	<mat-list-item *ngIf="!(isLoggedIn$ | async)" routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" matRipple>
+		<mat-icon mat-list-icon>input</mat-icon>
+		<h4 mat-line>Login</h4>
+    </mat-list-item>
+    <mat-list-item *ngIf="(isLoggedIn$ | async)" routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" matRipple>
 		<mat-icon mat-list-icon>account_circle</mat-icon>
 		<h4 mat-line>Profile</h4>
     </mat-list-item>
-	<mat-list-item routerLink="/expenses" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" matRipple>
+	<mat-list-item *ngIf="(isLoggedIn$ | async)" routerLink="/expenses" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" matRipple>
 		<mat-icon mat-list-icon>account_balance_wallet</mat-icon>
 		<h4 mat-line>Expenses</h4>
 	</mat-list-item>
-	<mat-list-item routerLink="/family" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" matRipple>
+	<mat-list-item *ngIf="(isLoggedIn$ | async)" routerLink="/family" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" matRipple>
 		<mat-icon mat-list-icon>group</mat-icon>
 		<h4 mat-line>Family</h4>
 	</mat-list-item>
-	<mat-list-item routerLink="/invite" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" matRipple>
+	<mat-list-item *ngIf="(isLoggedIn$ | async)" routerLink="/invite" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" matRipple>
 		<mat-icon mat-list-icon>group_add</mat-icon>
 		<h4 mat-line>Invite</h4>
 	</mat-list-item>

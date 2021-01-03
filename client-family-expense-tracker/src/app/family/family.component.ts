@@ -13,12 +13,10 @@ export class FamilyComponent implements OnInit {
   constructor(public members: FamilymemberService) {}
 
   ngOnInit(): void {
-    if (this.members.familymember$.getValue.length !== 0) {
-      this.members.getMembers();
-    }
+    this.members.getMembers();
   }
 
   createFamily(): void {
-    this.members.addFamily().subscribe();
+    this.members.addFamily();
   }
 }

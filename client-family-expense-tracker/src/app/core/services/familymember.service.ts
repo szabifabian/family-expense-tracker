@@ -17,7 +17,7 @@ export class FamilymemberService {
     const header = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}`
-    );
+    ).set('Content-Type', 'application/json');
     this.http
       .get<FamilyMember[]>(`${baseUrl}/familymember/members`, {
         headers: header,
@@ -27,13 +27,21 @@ export class FamilymemberService {
       });
   }
 
-  addFamily(): Observable<FamilyMember> {
+  addFamily(): void {
     const header = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}`
-    );
-    return this.http.post<FamilyMember>(`${baseUrl}/familymember/create`, {
-      headers: header,
+    ).set('Content-Type', 'text');
+    this.http
+    .post<FamilyMember[]>(`${baseUrl}/familymember/create`,[], {
+      headers: header
+    })
+    .subscribe((i) => {
+      this.familymember$.next(i);
+      window.location.reload();
+    },
+    error => {
+      console.log(error);
     });
   }
 }
