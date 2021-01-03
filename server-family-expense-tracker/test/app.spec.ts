@@ -108,14 +108,14 @@ describe("Family Expense Tracker App", () => {
   describe("Get family members list", () => {
     it("shouldn't get other family member list", async () => {
       await requestHandle
-        .get("/familymember/1/members")
+        .get("/familymember/members")
         .set("Authorization", token)
         .expect(403);
     });
 
     it("should get your family members", async () => {
       await requestHandle
-        .get("/familymember/2/members")
+        .get("/familymember/members")
         .set("Authorization", token)
         .expect(200);
     });
