@@ -31,7 +31,7 @@ export class InviteComponent implements OnInit {
 
   invite (form: FormGroup) {
     if (form.valid) {
-      this.is.inviteUser(<Invitation>form.value).subscribe();
+      this.is.inviteUser(<Invitation>form.value);
     }
     else {
       this.ns.show('HIBA! Adatok nem megfelelőek!');

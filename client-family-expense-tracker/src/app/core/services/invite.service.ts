@@ -9,22 +9,20 @@ import { NotificationService } from './notification.service';
   providedIn: 'root',
 })
 export class InviteService {
-  familymember$ = new BehaviorSubject<Invitation[]>([]);
+  invite$ = new BehaviorSubject<Invitation[]>([]);
 
   constructor(private http: HttpClient, private ns: NotificationService) {}
 
-  inviteUser(invitation: Invitation): Observable<Invitation> {
+  inviteUser(invitation: Invitation): void {
     const header = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}`
     );
     const { invited_user } = invitation;
-    return this.http.post<Invitation>(
-      `${baseUrl}/invitation/send`,
-      invited_user,
-      {
+    this.http
+      .post<string>(`${baseUrl}/invitation/send`, invited_user, {
         headers: header,
-      }
-    );
+      })
+      .subscribe()
   }
 }
