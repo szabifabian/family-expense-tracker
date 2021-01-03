@@ -1,26 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Invitation } from '../core/interfaces/invitation.interface';
+import { InviteService } from '../core/services/invite.service';
+import { NotificationService } from '../core/services/notification.service';
 
 @Component({
   selector: 'app-invite',
   templateUrl: './invite.component.html',
-  styleUrls: ['./invite.component.scss']
+  styleUrls: ['./invite.component.scss'],
 })
 export class InviteComponent implements OnInit {
+  public inviteForm: FormGroup;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(
+    private formBuilder: FormBuilder,
+    protected is: InviteService,
+    private ns: NotificationService
+  ) {
+    this.inviteForm = this.formBuilder.group({
+      invited_user: [null, Validators.required],
+    });
   }
 
-  public user_code = new FormControl('', [Validators.required, Validators.maxLength(5)]); //length just for testing
+  ngOnInit(): void {}
 
-  getErrorMessage() {
-    if (this.user_code.hasError('required')) {
-      return 'You must enter a value';
+  invite (form: FormGroup) {
+    if (form.valid) {
+      this.is.inviteUser(<Invitation>form.value).subscribe();
     }
-
-    return this.user_code.hasError('user_code') ? 'Not a valid code' : '';
+    else {
+      this.ns.show('HIBA! Adatok nem megfelelőek!');
+    }
   }
 
 }

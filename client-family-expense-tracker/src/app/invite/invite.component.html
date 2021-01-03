@@ -1,11 +1,14 @@
 <h1>Invite a new member to your family!</h1>
 
 <div class="example-container">
+  <form [formGroup]="inviteForm" fxLayoutAlign="stretch" fxLayout="column" (ngSubmit)="invite(inviteForm)" ovalidate>
     <mat-form-field appearance="fill">
       <mat-label>Enter the unique code</mat-label>
-      <input matInput placeholder="user's unique code" [formControl]="user_code" required>
-      <mat-error *ngIf="user_code.invalid">{{getErrorMessage()}}</mat-error>
+      <input matInput placeholder="user's unique code" formControlName="invited_user" required type="invited_user">
+      <mat-error>Not a valid code</mat-error>
     </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary">Add user</button>
+  </form>
 </div>
-<br>
-<button mat-raised-button>Add user</button>
+
