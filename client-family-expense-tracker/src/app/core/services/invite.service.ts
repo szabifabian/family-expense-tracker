@@ -18,7 +18,7 @@ export class InviteService {
       'Authorization',
       `Bearer ${localStorage.getItem('token')}`
     );
-    const { invited_user } = invitation;
+    const { invited_user } = {invited_user: invitation};
     this.http
       .post<string>(`${baseUrl}/invitation/send`, invited_user, {
         headers: header,
