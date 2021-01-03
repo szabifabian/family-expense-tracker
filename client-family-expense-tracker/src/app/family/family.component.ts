@@ -12,6 +12,7 @@ export class FamilyComponent implements OnInit {
   constructor(public members: FamilymemberService) { }
 
   ngOnInit(): void {
+    this.members.getMembers();
   }
 
 }

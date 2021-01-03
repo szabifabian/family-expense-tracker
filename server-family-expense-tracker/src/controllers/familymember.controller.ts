@@ -3,6 +3,7 @@ import { Router } from "express";
 import { Family } from "../entities/family";
 import { FamilyMember, FamilyRole } from "../entities/familymember";
 import { User } from "../entities/user";
+import { familyRouter } from "./family.controller";
 
 export const familyMemberRouter = Router();
 
@@ -34,16 +35,16 @@ familyMemberRouter
         }
     })
     //get familymembers of your family
-    .get('/:familyId/members', async (req, res) => {
+    .get('/members', async (req, res) => {
         const loggedInUserId = (req.user!.id);
-        const familyId = parseInt(req.params.familyId);
-        const memberOfTheFamily = await req.familymemberRepository!.findOne({user: loggedInUserId, family: familyId});
+        const memberOfTheFamily = (await req.familymemberRepository!.findOne({user: loggedInUserId}))?.family.id;
         if (!memberOfTheFamily){ //not member of the family
             return res.sendStatus(403); //forbidden
         }
         const members = await req.familymemberRepository!.find(
-            {family: familyId}
+            {family: memberOfTheFamily}
         );
+
         res.send(members);
     })
     //delete a familymember (you have to be the admin of family)
