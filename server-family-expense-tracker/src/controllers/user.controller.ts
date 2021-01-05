@@ -2,7 +2,8 @@ import { wrap } from "@mikro-orm/core";
 import { Router } from "express";
 import { User } from "../entities/user";
 import { hashPassword } from "../security/password-utils";
-import { generateJwt } from '../security/jwtGenerator';
+import { generateJwt } from "../security/jwtGenerator";
+import { passport } from "../security/passport";
 
 export const userRouter = Router();
 
@@ -40,14 +41,19 @@ userRouter
       return res.sendStatus(401);
     }
     return res.send({
-      token: generateJwt(user)
+      token: generateJwt(user),
     });
   })
-  /**For testing purposes: */
-  .get("/", async (req, res) => {
-    const users = await req.userRepository!.findAll();
-    res.send(users);
-  });
+
+  .get("/", passport.authenticate('jwt', { session: false }), async (req, res) => {
+    const loggedInUserId = (req.user!.id);
+    const user = await req.userRepository!.findOne({ id: loggedInUserId });
+    if (!user) {
+      return res.sendStatus(404); //required user is not found
+    } else {
+      return res.send(user);
+    }
+  })
 
 interface AuthenticationDto {
   username: string;
