@@ -85,14 +85,25 @@ balanceRouter
       res.sendStatus(200);
     }
   })
+
+  // TODO authorize user with the given id.
   .delete("/delete/:expenseId", async (req, res) => {
     const loggedInUserId = req.user!.id;
     const expenseId = parseInt(req.params.expenseId);
     const expense = await req.balanceRepository!.findOne({ id: expenseId });
 
+
     if (expense) {
       await req.balanceRepository!.nativeDelete({ id: expenseId });
-      res.sendStatus(200);
+
+      //Send back the new state to keep consistency.
+      let familyMembers = await req.familymemberRepository!.findOne({
+        user: loggedInUserId,
+      });
+      let expenses = await req.balanceRepository!.find({
+        familymembers: { id: familyMembers?.id },
+      });
+      res.send(expenses);
     } else {
       res.sendStatus(404);
     }

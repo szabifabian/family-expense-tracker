@@ -9,7 +9,7 @@ import { AddEditExpenseComponent } from './add-edit-expense/add-edit-expense.com
   styleUrls: ['./expenses.component.scss'],
 })
 export class ExpensesComponent implements OnInit {
-  constructor(public is: ExpenseService, public dialog: MatDialog,) {}
+  constructor(public is: ExpenseService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.is.getExpenses();
@@ -19,5 +19,9 @@ export class ExpensesComponent implements OnInit {
 		const dialogRef = this.dialog.open(AddEditExpenseComponent, {
 			width: '1000px'
 		})
-	}
+  }
+  
+  deleteExpense(id: Number): void {
+    this.is.deleteExpense(id);
+  }
 }

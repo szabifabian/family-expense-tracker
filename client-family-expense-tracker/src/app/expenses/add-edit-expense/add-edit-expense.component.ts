@@ -12,7 +12,7 @@ import { Expense } from '../../core/interfaces/expense.interface';
 })
 export class AddEditExpenseComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private ns: NotificationService, public is: ExpenseService,) {
+  constructor(private formBuilder: FormBuilder, private ns: NotificationService, public is: ExpenseService) {
     this.expenseForm = this.formBuilder.group({
       title: [null, Validators.required],
       about: [null, Validators.required],

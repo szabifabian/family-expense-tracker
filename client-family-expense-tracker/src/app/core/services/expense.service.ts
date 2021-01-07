@@ -35,4 +35,14 @@ export class ExpenseService {
             this.expenses$.next(this.expenses$.getValue().concat([i]))
         })
     }
+
+    deleteExpense(id: Number) {
+        const header = new HttpHeaders().set(
+            'Authorization', `Bearer ${localStorage.getItem('token')}`
+        );
+
+        this.http.delete<Expense[]>(`${baseUrl}/balance/delete/${id}`, {headers: header}).subscribe(i => {
+            this.expenses$.next(i);
+        })
+    }
 }
