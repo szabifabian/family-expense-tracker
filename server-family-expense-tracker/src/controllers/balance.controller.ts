@@ -52,7 +52,7 @@ balanceRouter
       wrappedBalance.assign(req.body, { em: req.orm.em });
       familyMember!.balances.add(balance);
       await req.familyRepository!.persistAndFlush(balance);
-      res.sendStatus(200);
+      res.send(balance)
     } else {
       res.sendStatus(402);
     }
