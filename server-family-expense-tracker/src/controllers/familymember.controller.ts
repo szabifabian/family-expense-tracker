@@ -31,7 +31,8 @@ familyMemberRouter
             const familymember = new FamilyMember();
             wrap(familymember).assign({role: FamilyRole.Admin, user: loggedInUserId, family: newFamily.id}, {em: req.orm.em});
             await req.familymemberRepository!.persistAndFlush(familymember);
-            return res.sendStatus(201);
+            const newFamilyMember = await req.familymemberRepository!.findOne({user: loggedInUserId}, {populate: ['user']});
+            return res.send(newFamilyMember);
         }
     })
     //get familymembers of your family
@@ -44,8 +45,6 @@ familyMemberRouter
         const members = await req.familymemberRepository!.find(
             {family: memberOfTheFamily}, {populate: ['user']}
         );
-
-        console.log(members);
 
         res.send(members);
     })

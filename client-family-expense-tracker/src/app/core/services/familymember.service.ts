@@ -36,12 +36,11 @@ export class FamilymemberService {
       `Bearer ${localStorage.getItem('token')}`
     ).set('Content-Type', 'text');
     this.http
-    .post<FamilyMember[]>(`${baseUrl}/familymember/create`,[], {
+    .post<FamilyMember>(`${baseUrl}/familymember/create`,[], {
       headers: header
     })
     .subscribe((i) => {
-      this.familymember$.next(i);
-      window.location.reload();
+      this.familymember$.next(this.familymember$.getValue().concat([i]));
     },
     error => {
       console.log(error);
