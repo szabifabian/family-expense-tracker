@@ -49,6 +49,7 @@ export class AuthService {
     this.http.post<any>(`${baseUrl}/user/login`, user, this.httpOptions).subscribe(
       data => {
         localStorage.setItem('token', data['token']);
+        
         this.isLogin$.next(true);
         this.ns.show('Sikeres bejelentkezés!');
       },

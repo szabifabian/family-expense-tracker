@@ -1,4 +1,4 @@
-<h1>Family members</h1>
+<h1>Family members <mat-icon *ngIf="isAdmin()" mat-list-icon (click)="deleteFamily()">delete</mat-icon></h1>
 <div *ngIf="members.familymember$.value.length !== 0;else elseBlock">
   <table #thenBlock mat-table [dataSource]="members.familymember$" class="mat-elevation-z8">
 
@@ -12,10 +12,17 @@
         <td mat-cell *matCellDef="let element"> {{element.role}} </td>
       </ng-container>
     
-      <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef> Amount </th>
-        <td mat-cell *matCellDef="let element"> {{element.amount}} Ft. </td>
+      <ng-container matColumnDef="operations" *ngIf="isAdmin();else elseBlock">
+        <th mat-header-cell *matHeaderCellDef> Operations </th>
+        <td mat-cell *matCellDef="let element"> <mat-icon mat-list-icon (click)="deleteFamilyMember(element.user.id)">delete</mat-icon> </td>
       </ng-container>
+
+      <ng-template #elseBlock>
+        <ng-container matColumnDef="operations">
+          <th mat-header-cell *matHeaderCellDef> Operations </th>
+          <td mat-cell *matCellDef="let element"> <mat-icon mat-list-icon>-</mat-icon> </td>
+        </ng-container>
+      </ng-template>
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
