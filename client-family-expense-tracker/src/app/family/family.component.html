@@ -4,7 +4,7 @@
 
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.user.username}} </td>
       </ng-container>
     
       <ng-container matColumnDef="role">
@@ -24,4 +24,7 @@
 </div>
 <ng-template #elseBlock>
   <button role="button" mat-raised-button color="primary" (click)="createFamily()">Család létrehozása</button>
+  <div *ngIf="members.invitations$.value.length !== 0">
+    <p>Van hívás</p>
+  </div>
 </ng-template>

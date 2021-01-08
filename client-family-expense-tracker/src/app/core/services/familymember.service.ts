@@ -4,12 +4,15 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { NotificationService } from '../services/notification.service';
 import { baseUrl } from 'src/environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Invitation } from '../interfaces/invitation.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FamilymemberService {
   familymember$ = new BehaviorSubject<FamilyMember[]>([]);
+  invitations$ = new BehaviorSubject<Invitation[]>([]);
+
 
   constructor(private http: HttpClient, private ns: NotificationService) {}
 
