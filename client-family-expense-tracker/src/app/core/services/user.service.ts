@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { baseUrl } from 'src/environments/environment';
 import { User } from '../interfaces/user.interface';
 
@@ -8,7 +7,6 @@ import { User } from '../interfaces/user.interface';
   providedIn: 'root',
 })
 export class UserService {
-
   constructor(private http: HttpClient) {}
 
   getProfile(): void {
