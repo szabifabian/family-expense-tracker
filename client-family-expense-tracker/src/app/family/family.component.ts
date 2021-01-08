@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FamilyMember } from '../core/interfaces/familymember.interface';
 import { FamilymemberService } from '../core/services/familymember.service';
 
 @Component({
