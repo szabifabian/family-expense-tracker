@@ -13,8 +13,14 @@
 				<mat-panel-description>
 					{{expense.type}}
 				</mat-panel-description>
+				<mat-panel-description>
+					<mat-icon (click)="deleteExpense(expense.id)">delete</mat-icon>
+				</mat-panel-description>
 			</mat-expansion-panel-header>
 			{{ expense.about }}
 		</mat-expansion-panel>
 	</mat-accordion>
 </div>
+<button mat-mini-fab color="accent" class="add-button" (click)="openAddIssueDialog()" matTooltip="Új jegy">
+	<mat-icon>add</mat-icon>
+</button>

@@ -26,4 +26,23 @@ export class ExpenseService {
                 this.expenses$.next(i);
             });
     }
+
+    addExpense(expense: Expense) {
+        const header = new HttpHeaders().set(
+            'Authorization', `Bearer ${localStorage.getItem('token')}`
+        );
+        this.http.post<Expense>(`${baseUrl}/balance/add`, expense, {headers: header}).subscribe(i => {
+            this.expenses$.next(this.expenses$.getValue().concat([i]))
+        })
+    }
+
+    deleteExpense(id: Number) {
+        const header = new HttpHeaders().set(
+            'Authorization', `Bearer ${localStorage.getItem('token')}`
+        );
+
+        this.http.delete<Expense[]>(`${baseUrl}/balance/delete/${id}`, {headers: header}).subscribe(i => {
+            this.expenses$.next(i);
+        })
+    }
 }

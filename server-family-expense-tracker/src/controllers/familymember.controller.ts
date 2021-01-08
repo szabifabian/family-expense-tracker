@@ -42,8 +42,10 @@ familyMemberRouter
             return res.sendStatus(403); //forbidden
         }
         const members = await req.familymemberRepository!.find(
-            {family: memberOfTheFamily}
+            {family: memberOfTheFamily}, {populate: ['user']}
         );
+
+        console.log(members);
 
         res.send(members);
     })

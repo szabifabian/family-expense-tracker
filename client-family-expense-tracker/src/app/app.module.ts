@@ -30,6 +30,7 @@ import { MatTableModule } from '@angular/material/table'
 
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
+import { AddEditExpenseComponent } from './expenses/add-edit-expense/add-edit-expense.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { RegisterComponent } from './register/register.component';
     ProfileComponent,
     LoginComponent,
     RegisterComponent,
+    AddEditExpenseComponent,
   ],
   imports: [
     BrowserModule,
