@@ -27,4 +27,8 @@ export class FamilyComponent implements OnInit {
   deleteFamily(): void {
     this.members.deleteFamily();
   }
+
+  isAdmin(): boolean {
+    return this.members.familymember$.getValue().length!==0 && this.members.familymember$.getValue()[0].role === "ADMIN";
+  }
 }

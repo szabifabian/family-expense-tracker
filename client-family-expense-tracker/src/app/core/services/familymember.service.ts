@@ -29,7 +29,6 @@ export class FamilymemberService {
       })
       .subscribe((i) => {
         this.familymember$.next(i);
-        console.log(i);
       });
   }
 
@@ -46,7 +45,6 @@ export class FamilymemberService {
       this.familymember$.next(this.familymember$.getValue().concat([i]));
     },
     error => {
-      console.log(error);
     });
   }
 
@@ -57,13 +55,12 @@ export class FamilymemberService {
     )
     this.http
     .get<FamilyMember>(`${baseUrl}/familymember/member`, {
-      headers: header
+      headers: header,
     })
     .subscribe((i) => {
       this.user$.next(this.user$.getValue().concat([i]))
     },
     error => {
-      console.log(error);
     });
   }
 
@@ -74,13 +71,12 @@ export class FamilymemberService {
     )
     this.http
     .delete<FamilyMember[]>(`${baseUrl}/familymember/delete/${id}`, {
-      headers: header
+      headers: header,
     })
     .subscribe((i) => {
       this.familymember$.next(i)
     },
     error => {
-      console.log(error);
     });
   }
 
@@ -99,7 +95,6 @@ export class FamilymemberService {
       window.location.reload();
     },
     error => {
-      console.log(error);
     });
   }
 }
