@@ -6,7 +6,7 @@ export const environment = {
   production: false
 };
 
-export const baseUrl: string = 'https://family-expense-tracker.herokuapp.com';
+export const baseUrl: string = 'http://localhost:3005';
 
 /*
  * For easier debugging in development mode, you can import the following file
