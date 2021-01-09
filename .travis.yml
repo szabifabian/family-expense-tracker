@@ -35,7 +35,7 @@ jobs:
       - npm install
       - npm run build
     script:
-      - npm run test -- --watch=false --no-progress --browsers=HeadlessChrome
+      - npm run test --watch=false
     deploy:
        provider: heroku
        skip_cleanup: true
