@@ -52,11 +52,11 @@ invitationRouter
             return res.sendStatus(403);
         }else{
             let user = await req.userRepository!.findOne({id: loggedInUserId});
-            const pendingInvitations = await req.invitationRepository!.find({invited_user: loggedInUserId, status: Status.Pending})
+            const pendingInvitations = await req.invitationRepository!.find({invited_user: user?.username, status: Status.Pending})
             if(pendingInvitations.length === 0){ //you don't have invitations
                 return res.sendStatus(404);
             }else{
-                
+
                 const invitationFrom = await req.familymemberRepository!.findOne({user: from});
                 if(!invitationFrom){ //you don't have invitation from this user
                     return res.sendStatus(404);
@@ -97,11 +97,11 @@ invitationRouter
 
         let alreadyFamilyMember = await req.familymemberRepository!.findOne({user: loggedInUserId});
         let user = await req.userRepository!.findOne({id: loggedInUserId});
+
         if(alreadyFamilyMember){ //you are already a family member
             return res.sendStatus(403);
         }else{
-            const pendingInvitations = await req.invitationRepository!.find({invited_user: loggedInUserId ,status: Status.Pending}, {populate: ['invitedBy']});
-            console.log(pendingInvitations);
+            const pendingInvitations = await req.invitationRepository!.find({invited_user: user?.username ,status: Status.Pending}, {populate: ['invitedBy']});
             return res.send(pendingInvitations);
         }
     })

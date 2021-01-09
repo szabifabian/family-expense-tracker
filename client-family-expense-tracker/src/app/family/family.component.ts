@@ -17,6 +17,7 @@ export class FamilyComponent implements OnInit {
     this.members.getUser();
     this.members.getMembers();
     this.invitations.getPendingInvitations();
+    console.log(this.invitations.pendingInvitations$);
   }
 
   createFamily(): void {
@@ -51,7 +52,7 @@ export class FamilyComponent implements OnInit {
     this.invitations.acceptInvitation(id);
   }
 
-  declineInvitation():void {
-    
+  declineInvitation(id: number):void {
+    this.invitations.declineInvitation(id);
   }
 }

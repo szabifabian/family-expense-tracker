@@ -49,11 +49,28 @@ export class InviteService {
     this.http
       .put(`${baseUrl}/invitation/accept/${id}`,[], {
         headers: header,
+        responseType: 'text' as 'json'
       })
-      .subscribe();
+      .subscribe(
+        data => {
+        window.location.reload();
+      });
   }
 
-  declineInvitation(): void {
-    
+  declineInvitation(id: number): void {
+    const header = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('token')}`
+    );
+    this.http
+      .put(`${baseUrl}/invitation/decline/${id}`,[], {
+        headers: header,
+        responseType: 'text' as 'json'
+      })
+      .subscribe(
+        data => {
+          window.location.reload();
+        }
+      );
   }
 }

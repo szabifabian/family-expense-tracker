@@ -91,7 +91,6 @@ familyMemberRouter
         }else{
             const familyId = adminFamilyMember.family.id;
             const familyMembers = await req.familymemberRepository!.find({family: adminFamilyMember.family})
-            console.log(familyId,familyMembers);
             await req.familymemberRepository!.nativeDelete({family: familyMembers});
             await req.familyRepository!.nativeDelete({id: familyId});
             return res.sendStatus(200);
