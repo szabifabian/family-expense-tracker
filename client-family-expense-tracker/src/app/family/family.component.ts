@@ -17,7 +17,6 @@ export class FamilyComponent implements OnInit {
     this.members.getUser();
     this.members.getMembers();
     this.invitations.getPendingInvitations();
-    console.log(this.invitations.pendingInvitations$);
   }
 
   createFamily(): void {

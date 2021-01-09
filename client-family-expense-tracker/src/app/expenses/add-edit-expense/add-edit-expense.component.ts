@@ -28,7 +28,6 @@ export class AddEditExpenseComponent implements OnInit {
 
   addExpense(form: FormGroup) {
     if (form.valid) {
-      console.log(form.value);
       this.is.addExpense(<Expense>form.value);
     }
     else {

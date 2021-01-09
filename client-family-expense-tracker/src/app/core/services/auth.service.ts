@@ -30,7 +30,6 @@ export class AuthService {
   register(user: User): void {
     this.http.post<User>(`${baseUrl}/user/register`, user, this.httpOptions).subscribe(
       data => {
-        console.log(data);
         this.ns.show('Sikeres regisztráció!');
         this.router.navigate(['/login']);
       },

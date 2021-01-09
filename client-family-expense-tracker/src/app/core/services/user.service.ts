@@ -21,6 +21,7 @@ export class UserService {
         headers: header,
       })
       .subscribe((i) => {
+        this.userProfile$.next([]);
         this.userProfile$.next(this.userProfile$.getValue().concat(i));
       });
   }

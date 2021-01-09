@@ -29,6 +29,9 @@ export class FamilymemberService {
       })
       .subscribe((i) => {
         this.familymember$.next(i);
+      },
+      error => {
+        
       });
   }
 
@@ -58,6 +61,7 @@ export class FamilymemberService {
       headers: header,
     })
     .subscribe((i) => {
+      this.user$.next([]);
       this.user$.next(this.user$.getValue().concat([i]))
     },
     error => {
