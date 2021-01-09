@@ -18,11 +18,11 @@ A projekt célja a családi költségek nyomon követése, naplózása. A felhas
 - REST api  (Frotend - Backend kommunikáció)
 
 [Backend dokumentáció](https://github.com/szabifabian/family-expense-tracker/wiki/Backend-dokument%C3%A1ci%C3%B3)
-<br>
-[Frontend dokumentáció](https://github.com/szabifabian/family-expense-tracker/wiki/Frontend-dokument%C3%A1ci%C3%B3)
 
 #### Frontend
 - Angular (Frontend)
+
+[Frontend dokumentáció](https://github.com/szabifabian/family-expense-tracker/wiki/Frontend-dokument%C3%A1ci%C3%B3)
 
 #### Verziókövető
 
@@ -66,3 +66,5 @@ A projekt célja a családi költségek nyomon követése, naplózása. A felhas
 
 - Regisztráció szinten mindenki felhasználó  
 - Család létrehozója az adott családon belül az admin, ezáltal joga van a csoporton belül kidobni embereket
+
+[Felhasználói dokumentáció](https://github.com/szabifabian/family-expense-tracker/wiki/Felhaszn%C3%A1l%C3%B3i-dokument%C3%A1ci%C3%B3)
