@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FamilymemberService } from '../core/services/familymember.service';
+import { InviteService } from '../core/services/invite.service';
 
 @Component({
   selector: 'app-family',
@@ -8,12 +9,14 @@ import { FamilymemberService } from '../core/services/familymember.service';
 })
 export class FamilyComponent implements OnInit {
   displayedColumns: string[] = ['name', 'role', 'operations'];
+  displayedColumns2: string[] = ['name', 'accept', 'decline'];
 
-  constructor(public members: FamilymemberService) {}
+  constructor(public members: FamilymemberService, public invitations: InviteService) {}
 
   ngOnInit(): void {
     this.members.getUser();
     this.members.getMembers();
+    this.invitations.getPendingInvitations();
   }
 
   createFamily(): void {
@@ -29,6 +32,26 @@ export class FamilyComponent implements OnInit {
   }
 
   isAdmin(): boolean {
-    return this.members.familymember$.getValue().length!==0 && this.members.familymember$.getValue()[0].role === "ADMIN";
+
+    if(this.members.familymember$.getValue().length !== 0 && this.members.user$.getValue().length !== 0) {
+      let findMyId = 0;
+
+
+      while(this.members.familymember$.getValue()[findMyId].id !== this.members.user$.getValue()[0].id) {
+        findMyId++;
+      }
+
+      return this.members.familymember$.getValue()[findMyId].role === "ADMIN";
+    } else {
+      return false;
+    }
+  }
+
+  acceptInvitation(id: number):void {
+    this.invitations.acceptInvitation(id);
+  }
+
+  declineInvitation():void {
+    
   }
 }
