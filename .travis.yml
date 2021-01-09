@@ -1,7 +1,7 @@
 
 jobs:
   include:
-  - language: node_js
+  - language: nodejs
     node_js: node
     cache:
       directories:
@@ -13,6 +13,28 @@ jobs:
       skip_cleanup: true
       provider: heroku
       api_key:
-        secure: Q7Ap/i4dfl6aQUge3Q5MIsnvIlY8Np2DuXcIb5byUrhScn3svs2il26Tgvo5tLysOZuFFo5wYsUhpA1jK6/el7LJh6pATly6yfM9xMYEmyVFZOWZLHozHn0IgWpwD4JTLnTKnKRUo7av9QHwcvmvWsdMs8EEX+P7iKgYtqgz7/rmxEFGdgskCB4DcZA8Fwl+SkL3+UXRr8OK1T6oas3/c5Xqmlgxvuirlw4efhM2McFNCayhdMemA0DFHF+aqp7hqsL9qOZS4sk7IhgGXA1qK0ngSHjuAObvYCUKXLwKAVSV5+5wby1MavWUp2kZYqnK41yy4NcuVelaCTURWHn/cguY3M2PcBUw7kiyYd3Y7gix+kwBVinsgp/UX2fIRcG7lxdujvZE83P3Ng8SOjmIXTjBdxWXDo2p0LyoVH5Vjbjm+VmCXGPRRc1gEyCHDZIcdyoH1jm2Zx1iDDF72+chV6+SJM+IQesvmQcNbW904BQP7g8LYd9AAyO/8dK8ZjqRqaN+MufADN+ImH9NGU1szcX76EHOwAba7K5WDklAhs8fJNUH3g8xqVTguhg6Aac1jF3nG7vniTCpTBJzOYgjeZQ7Ti/yydXS7W/J28cnE3OOcKdE9DE6wmPUs/NrPz2kK4Mwo5g2+fS6ZmR+Q5Vk7Srcwk0rLZcvE/NIjCcftYs=
+        secure: "mZXibRORedrKGBpgPQdv1WZtA/duIz6PI+2nuNI6F0Gz7TkQOJNFLwuufOApZd3Boh4VxvVX7tRJ4ga6JC3sMgq9+w+PVPdYTv4+znJyb2L+L34y/waWCZhn7Xjznb7p7eYW/nitjGHIi9mtC2AtRKOSD5ETgfFkZQLa3dgclV+96n6N6pHlMowiikFNFPC8ZvKCICyMlMz0Wuu9+3HsiOm7cfm5oiXX7c8ywzcKUlrBfxmmlI5NZmm6LoK6ix48NQCDYGV3CI4zN9x/dL+tn2Ge/cjhdqYEJxBdNVIZZN3eY+fx6N/lHzvTPSrM5g9ulGrvRu3PCJ+IIqilJ4Bm4WiT44ixeuuDwtEocEWc74C7rBg0j7iIAVbcqZH/OCiaotkAiwFL65UBJlzJe/AzK9SVroN6JRDJCamFzElNcML5yGjjVwcyshGEQ5Sd8pu/wlhYR/TusFj4rPQ5Ysc2i/we2wtWmE0UCyM51d66yZnqHdadC6LvdTWnQpGQftwmsi3Mcww8vuCcVI2zqOWX6z9xFD1mZfu4Po3kGM6R9+bBwIFfF3cC9c/hwWhK+gHW9NYJnRQ6/5EnYsVMse5pWpZ9WMymcZVQbcvM44mPscv4lF8wsoqS3u8s3UxYISvF78ef2RgwsxL14bEeX1SLXSTW7GH3ydgrkufGs/YvYgc="
       app: family-expense-tracker
       on: main
+
+  - language: node_js
+    node_js: node
+
+    cache:
+      directories:
+        - ./node_modules
+    before_script:
+      - cd client-family-expense-tracker
+      - npm install
+      - npm run build
+
+    script:
+      - echo "skipping tests"
+    deploy:
+       provider: heroku
+       skip_cleanup: true
+       keep-history: true
+       api_key:
+         secure: "mZXibRORedrKGBpgPQdv1WZtA/duIz6PI+2nuNI6F0Gz7TkQOJNFLwuufOApZd3Boh4VxvVX7tRJ4ga6JC3sMgq9+w+PVPdYTv4+znJyb2L+L34y/waWCZhn7Xjznb7p7eYW/nitjGHIi9mtC2AtRKOSD5ETgfFkZQLa3dgclV+96n6N6pHlMowiikFNFPC8ZvKCICyMlMz0Wuu9+3HsiOm7cfm5oiXX7c8ywzcKUlrBfxmmlI5NZmm6LoK6ix48NQCDYGV3CI4zN9x/dL+tn2Ge/cjhdqYEJxBdNVIZZN3eY+fx6N/lHzvTPSrM5g9ulGrvRu3PCJ+IIqilJ4Bm4WiT44ixeuuDwtEocEWc74C7rBg0j7iIAVbcqZH/OCiaotkAiwFL65UBJlzJe/AzK9SVroN6JRDJCamFzElNcML5yGjjVwcyshGEQ5Sd8pu/wlhYR/TusFj4rPQ5Ysc2i/we2wtWmE0UCyM51d66yZnqHdadC6LvdTWnQpGQftwmsi3Mcww8vuCcVI2zqOWX6z9xFD1mZfu4Po3kGM6R9+bBwIFfF3cC9c/hwWhK+gHW9NYJnRQ6/5EnYsVMse5pWpZ9WMymcZVQbcvM44mPscv4lF8wsoqS3u8s3UxYISvF78ef2RgwsxL14bEeX1SLXSTW7GH3ydgrkufGs/YvYgc="
+       app: expense-tracker--frontend
+       on: main

@@ -10,6 +10,7 @@ import { NotificationService } from './notification.service';
 })
 export class InviteService {
   invite$ = new BehaviorSubject<Invitation[]>([]);
+  pendingInvitations$ = new BehaviorSubject<Invitation[]>([]);
 
   constructor(private http: HttpClient, private ns: NotificationService) {}
 
@@ -24,5 +25,35 @@ export class InviteService {
         headers: header,
       })
       .subscribe()
+  }
+
+  getPendingInvitations(): void {
+    const header = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('token')}`
+    );
+    this.http
+      .get<Invitation[]>(`${baseUrl}/invitation/pendings`, {
+        headers: header,
+      })
+      .subscribe((i) => {
+        this.pendingInvitations$.next(i);
+      })
+  }
+
+  acceptInvitation(id: number): void {
+    const header = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('token')}`
+    );
+    this.http
+      .put(`${baseUrl}/invitation/accept/${id}`,[], {
+        headers: header,
+      })
+      .subscribe();
+  }
+
+  declineInvitation(): void {
+    
   }
 }

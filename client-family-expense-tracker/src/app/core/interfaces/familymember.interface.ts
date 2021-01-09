@@ -4,5 +4,6 @@ export interface FamilyMember{
     name: string,
     role: 'ADMIN' | 'USER',
     amount: number,
-    user: User[]
+    user: User,
+    id: number
 }

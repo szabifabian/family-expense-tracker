@@ -12,6 +12,9 @@ export class ProfileComponent implements OnInit {
 
   constructor(public user: UserService) {}
 
+
+  userProfile = this.user.userProfile$.getValue()[0];
+
   ngOnInit(): void {
     this.user.getProfile();
   }

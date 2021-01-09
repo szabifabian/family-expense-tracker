@@ -2,4 +2,4 @@ export const environment = {
   production: true
 };
 
-export const baseUrl: string = 'http://localhost:3005';
+export const baseUrl: string = 'https://family-expense-tracker.herokuapp.com';
