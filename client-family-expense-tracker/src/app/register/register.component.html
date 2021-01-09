@@ -1,6 +1,6 @@
 <div fxLayoutAlign="center center" fxFlexFill>
     <mat-card fxFlex="25">
-        <mat-toolbar color="primary">Regisztráció</mat-toolbar>
+        <mat-toolbar class="changecolor">Registration</mat-toolbar>
         <form [formGroup]="registerForm" fxLayoutAlign="stretch" fxLayout="column" (ngSubmit)="register(registerForm)" [ngClass]="{'up': password.value.length > 0}" novalidate>
             <mat-form-field>
                 <input
@@ -11,7 +11,7 @@
                     required
                     appNameFormat
                 >
-                <mat-error>Mező kitöltése kötelező, minimum karakterszám: 5!</mat-error>
+                <mat-error>Minimum chacracter: 5!</mat-error>
             </mat-form-field>
             <br>
             <mat-form-field>
@@ -22,7 +22,7 @@
                     formControlName="email"
                     required
                 >
-                <mat-error>Adjon meg egy érvényes E-mail címet!</mat-error>
+                <mat-error>Give a valid email address!</mat-error>
             </mat-form-field>
             <br>
             <mat-form-field>
@@ -35,7 +35,7 @@
                     formControlName="password"
                     required
                 >
-                <mat-error>Jelszó legalább 30 karakter hosszú legyen!</mat-error>
+                <mat-error>Password need to contain at least 8 characters!</mat-error>
             </mat-form-field>
             <br>
             <mat-form-field>
@@ -50,8 +50,7 @@
             <br>
             <button
                 mat-raised-button
-                color="primary"
-                style="margin:15px 0 0 0"
+                class="changecolor"
             >
                 Regisztráció
             </button>

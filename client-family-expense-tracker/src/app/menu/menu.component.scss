@@ -1,13 +1,13 @@
 @import "../../assets/styles/variables";
 
 mat-icon {
-    color:#434f5d;
+    color:#ffffff;
 }
 
 .mat-list {
+	color: white;
 	padding-top: 0;
 	.mat-list-item {
-		color: $mi-font3 !important;
 		position: relative;
 		cursor: pointer;
 		outline: none;
@@ -25,4 +25,8 @@ mat-icon {
 			//background-color: $bb-secondary;
 		}
 	}
+}
+
+h4 {
+	color:white;
 }

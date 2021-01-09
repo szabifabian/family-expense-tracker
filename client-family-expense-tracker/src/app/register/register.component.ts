@@ -22,8 +22,8 @@ export class RegisterComponent{
     this.registerForm = this.formBuilder.group({
 			username: [null, [Validators.minLength(5), Validators.required]],
 			email: [null, [Validators.email, Validators.required]],
-			password: [null, [Validators.required, Validators.maxLength(30)]],
-			passwordConfirm: [null, Validators.required]
+			password: [null, [Validators.required, Validators.minLength(8)]],
+			passwordConfirm: [null, Validators.required, Validators.minLength(8)]
 		},
 		{
 			/* validator: MatchValidation.MatchPassword */

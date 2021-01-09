@@ -15,6 +15,7 @@ export class MenuComponent {
 	constructor(protected as: AuthService, public members: FamilymemberService) {
 		this.isLoggedIn$ = as.isLoggedIn();
 		this.members.getMembers();
+		this.members.getUser();
 	}
 
 	logout(): void {

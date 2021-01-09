@@ -1,6 +1,6 @@
-<h1>Invite a new member to your family!</h1>
-
-<div class="example-container">
+<div class="center">
+  <mat-card>
+    <mat-card-title>Invite a new member to your family!</mat-card-title>
   <form [formGroup]="inviteForm" fxLayoutAlign="stretch" fxLayout="column" (ngSubmit)="invite(inviteForm)" ovalidate>
     <mat-form-field appearance="fill">
       <mat-label>Enter the unique code</mat-label>
@@ -10,5 +10,6 @@
     <br>
     <button mat-raised-button color="primary">Send invitation</button>
   </form>
+</mat-card>
 </div>
 

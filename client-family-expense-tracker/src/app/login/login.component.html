@@ -1,7 +1,7 @@
   
 <div fxLayoutAlign="center center" fxFlexFill>
     <mat-card fxFlex="25">
-        <mat-toolbar color="primary">Bejelentkezés</mat-toolbar>
+        <mat-toolbar class="changecolor">Bejelentkezés</mat-toolbar>
         <form [formGroup]="loginForm" fxLayoutAlign="stretch" fxLayout="column" (ngSubmit)="login(loginForm)" ovalidate>
             <mat-form-field>
                 <input
@@ -29,12 +29,12 @@
             <br>
             <button
 				mat-raised-button
-				color="primary"
+				class="changecolor"
 			>
 				Belépés
-			</button>
+            </button>
+            <br>
+            <button mat-raised-button class="changecolor" routerLink="/register">Még nem vagy regisztrálva?</button>
         </form>
-        <br>
-        <button mat-raised-button color="primary" routerLink="/register">Még nem vagy regisztrálva?</button>
     </mat-card>
 </div>

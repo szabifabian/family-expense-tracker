@@ -1,5 +1,6 @@
-<h1>Profile</h1>
-<div class="expense" *ngFor="let expense of user.userProfile$ | async">
+
+<div *ngFor="let expense of user.userProfile$ | async" class="profile">
+    <h1>Profile</h1>
   <mat-card>
     <mat-card-title>{{ expense.username }}</mat-card-title>
     <mat-card-subtitle>{{ expense.email }}</mat-card-subtitle>
