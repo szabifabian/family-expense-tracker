@@ -51,7 +51,7 @@ describe("Family Expense Tracker App", () => {
       await requestHandle
         .post("/familymember/create")
         .set("Authorization", token)
-        .expect(201);
+        .expect(200);
     });
 
     it("shouldn't create a new family for second time ", async () => {
@@ -106,12 +106,6 @@ describe("Family Expense Tracker App", () => {
   });
 
   describe("Get family members list", () => {
-    it("shouldn't get other family member list", async () => {
-      await requestHandle
-        .get("/familymember/members")
-        .set("Authorization", token)
-        .expect(403);
-    });
 
     it("should get your family members", async () => {
       await requestHandle
