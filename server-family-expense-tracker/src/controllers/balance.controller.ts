@@ -21,7 +21,7 @@ balanceRouter
       user: loggedInUserId,
     });
     let expenses = await req.balanceRepository!.find({
-      familymembers: { id: familyMembers?.id }
+      familymembers: { id: familyMembers?.id },
     });
     console.log(expenses);
     res.send(expenses);
@@ -53,7 +53,7 @@ balanceRouter
       wrappedBalance.assign(req.body, { em: req.orm.em });
       familyMember!.balances.add(balance);
       await req.familyRepository!.persistAndFlush(balance);
-      res.send(balance)
+      res.send(balance);
     } else {
       res.sendStatus(402);
     }
@@ -92,7 +92,6 @@ balanceRouter
     const loggedInUserId = req.user!.id;
     const expenseId = parseInt(req.params.expenseId);
     const expense = await req.balanceRepository!.findOne({ id: expenseId });
-
 
     if (expense) {
       await req.balanceRepository!.nativeDelete({ id: expenseId });

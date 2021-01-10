@@ -34,7 +34,7 @@ export class InviteComponent implements OnInit {
       this.is.inviteUser(<Invitation>form.value);
     }
     else {
-      this.ns.show('HIBA! Adatok nem megfelelőek!');
+      this.ns.show('ERROR! Invalid data');
     }
   }
 

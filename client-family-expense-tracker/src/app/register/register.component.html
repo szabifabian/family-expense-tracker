@@ -6,7 +6,7 @@
                 <input
                     matInput
                     type="text"
-                    placeholder="Az Ön neve"
+                    placeholder="Username"
                     formControlName="username"
                     required
                     appNameFormat
@@ -18,7 +18,7 @@
                 <input
                     matInput
                     type="email"
-                    placeholder="E-mail címe"
+                    placeholder="e-mail address"
                     formControlName="email"
                     required
                 >
@@ -30,7 +30,7 @@
                     matInput
                     #password
                     type="password"
-                    placeholder="Jelszó"
+                    placeholder="password"
                     color="primary"
                     formControlName="password"
                     required
@@ -38,21 +38,11 @@
                 <mat-error>Password need to contain at least 8 characters!</mat-error>
             </mat-form-field>
             <br>
-            <mat-form-field>
-                <input
-                    matInput
-                    type="password"
-                    placeholder="Jelszó ismétlése"
-                    formControlName="passwordConfirm"
-                    required>
-                <mat-error>Megadott jelszavak nem azonosak!</mat-error>
-            </mat-form-field>
-            <br>
             <button
                 mat-raised-button
                 class="changecolor"
             >
-                Regisztráció
+                Register
             </button>
         </form>
     </mat-card>
