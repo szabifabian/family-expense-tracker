@@ -31,7 +31,7 @@ export class AddEditExpenseComponent implements OnInit {
       this.is.addExpense(<Expense>form.value);
     }
     else {
-      this.ns.show('HIBA! Adatok nem megfelelőek!');
+      this.ns.show('Error! Invalid data!');
     }
   }
 

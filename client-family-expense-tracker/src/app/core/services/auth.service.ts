@@ -30,11 +30,11 @@ export class AuthService {
   register(user: User): void {
     this.http.post<User>(`${baseUrl}/user/register`, user, this.httpOptions).subscribe(
       data => {
-        this.ns.show('Sikeres regisztráció!');
+        this.ns.show('You have registered successfully!');
         this.router.navigate(['/profile']);
       },
       error => {
-        this.ns.show('HIBA! Regisztráció sikertelen!');
+        this.ns.show('Error! Registration failed!');
         console.error(error);
       }
     );
@@ -50,11 +50,11 @@ export class AuthService {
         localStorage.setItem('token', data['token']);
         
         this.isLogin$.next(true);
-        this.ns.show('Sikeres bejelentkezés!');
+        this.ns.show('You are logged in!');
         this.router.navigate(['/profile']);
       },
       error => {
-        this.ns.show('HIBA! Bejelentkezés sikertelen!');
+        this.ns.show('Error! Invalid credentials!');
         console.error(error);
       }
     );
@@ -63,7 +63,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     this.isLogin$.next(false);
-    this.ns.show('Sikeres kijelentkezés!');
+    this.ns.show('You have logged out successfully!');
     this.router.navigate(['/login']);
   }
 
