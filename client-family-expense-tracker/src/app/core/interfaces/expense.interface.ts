@@ -1,6 +1,6 @@
 export interface Expense {
     id: number;
-    title: number;
+    title: string;
     type: 'EXPENSE' | 'INCOME';
     amount: number;
     about: string;

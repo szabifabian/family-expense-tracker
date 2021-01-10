@@ -1,5 +1,5 @@
+<h1>Expenses</h1>
 <div class="expense" *ngFor="let expense of (is.expenses$ | async) let i = index" [attr.data-index] = "i">
-	<h1>Expenses</h1>
 	<br>
 	<mat-accordion multi>
 		<mat-expansion-panel>
@@ -8,10 +8,17 @@
 					#{{ i+1 }}
 				</mat-panel-title>
 				<mat-panel-description>
-					{{ (expense.about.length > 50) ? (expense.about | slice:0:50) + '...' : expense.about }}
+					{{ (expense.title.length > 10) ? (expense.title | slice:0:10) + '...' : expense.title }}
 				</mat-panel-description>
 				<mat-panel-description>
-					{{expense.type}}
+					<div *ngIf="expense.type === 'EXPENSE'; then thenBlock1 else elseBlock1"></div>
+					<ng-template #thenBlock1>Expense</ng-template>
+					<ng-template #elseBlock1>Income</ng-template>
+				</mat-panel-description>
+				<mat-panel-description>
+					<div *ngIf="expense.type === 'EXPENSE'; then thenBlock2 else elseBlock2"></div>
+					<ng-template #thenBlock2>{{-expense.amount}}ft</ng-template>
+					<ng-template #elseBlock2>{{expense.amount}}ft</ng-template>
 				</mat-panel-description>
 				<mat-panel-description>
 					<mat-icon (click)="deleteExpense(expense.id)">delete</mat-icon>

@@ -16,8 +16,8 @@ export class AddEditExpenseComponent implements OnInit {
     this.expenseForm = this.formBuilder.group({
       title: [null, Validators.required],
       about: [null, Validators.required],
-      type: null,
-      amount: null,
+      type: [null, Validators.required],
+      amount: [null, Validators.required],
     });
    }
 
