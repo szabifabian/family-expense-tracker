@@ -24,7 +24,7 @@ export class InviteService {
       .post<string>(`${baseUrl}/invitation/send`, invited_user, {
         headers: header,
       })
-      .subscribe()
+      .subscribe();
   }
 
   getPendingInvitations(): void {

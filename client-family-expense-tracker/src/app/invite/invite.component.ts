@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Invitation } from '../core/interfaces/invitation.interface';
 import { InviteService } from '../core/services/invite.service';
 import { NotificationService } from '../core/services/notification.service';
@@ -29,13 +24,12 @@ export class InviteComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  invite (form: FormGroup) {
+  invite(form: FormGroup) {
     if (form.valid) {
       this.is.inviteUser(<Invitation>form.value);
-    }
-    else {
+      this.ns.show('You have sent the invitation!');
+    } else {
       this.ns.show('ERROR! Invalid data');
     }
   }
-
 }

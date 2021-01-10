@@ -8,7 +8,7 @@ export class Family{
     id!: number;
 
     @Property()
-    family_name?: string; 
+    family_name!: string; 
 
     @OneToMany(() => FamilyMember, familymember => familymember.family)
     familymembers = new Collection<FamilyMember>(this);

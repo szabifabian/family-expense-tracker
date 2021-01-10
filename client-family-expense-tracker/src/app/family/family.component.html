@@ -1,6 +1,7 @@
 <div class="center">
 <h1>Family members <mat-icon *ngIf="isAdmin()" mat-list-icon (click)="deleteFamily()">delete</mat-icon></h1>
 <div *ngIf="members.familymember$.value.length !== 0;else elseBlock">
+  <div *ngFor="let family of members.family$ | async"><h2>{{family.family_name}}</h2></div>
   <table #thenBlock mat-table [dataSource]="members.familymember$" class="mat-elevation-z8">
 
       <ng-container matColumnDef="name">
@@ -31,7 +32,15 @@
   </table>
 </div>
 <ng-template #elseBlock>
-  <button role="button" mat-raised-button color="primary" (click)="createFamily()">Create new family</button>
+  <form [formGroup]="familyForm" fxLayoutAlign="stretch" fxLayout="column" (ngSubmit)="createFamily(familyForm)" ovalidate>
+    <mat-form-field appearance="fill">
+      <mat-label>Family name</mat-label>
+      <input matInput placeholder="family name" formControlName="family_name" required type="family_name">
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary">Create new family</button>
+  </form>
+  <!--<button role="button" mat-raised-button color="primary" (click)="createFamily()">Create new family</button>-->
 </ng-template>
 
 <div *ngIf="invitations.pendingInvitations$.getValue().length !== 0">

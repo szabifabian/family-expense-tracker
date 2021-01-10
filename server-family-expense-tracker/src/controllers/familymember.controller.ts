@@ -17,6 +17,7 @@ familyMemberRouter
     //create new family->become first family member
     .post('/create', async (req, res) => {
         const loggedInUserId = (req.user!.id);
+        const {family_name} = req.body;
 
         //check whether is already a family member
         let familyMembers = await req.familymemberRepository!.findOne({user: loggedInUserId});
@@ -25,7 +26,7 @@ familyMemberRouter
         }else{
             //become a member of a family
             let newFamily = new Family();
-            wrap(newFamily).assign({family_name: ''}, {em: req.orm.em});
+            wrap(newFamily).assign({family_name: family_name}, {em: req.orm.em});
             await req.familyRepository!.persistAndFlush(newFamily);
 
             const familymember = new FamilyMember();
