@@ -1,6 +1,5 @@
 import { app } from "../src/server";
 import supertest from "supertest";
-import { MikroORM } from "@mikro-orm/core";
 
 describe("Family Expense Tracker App", () => {
   const user = {
@@ -18,6 +17,8 @@ describe("Family Expense Tracker App", () => {
 
   let token: string;
   let user2Token: string;
+  const family = { family_name: 'First name'};
+  const family2 = { family_name: 'Second name'};
 
   beforeEach(() => {
     requestHandle = supertest(app);
@@ -50,6 +51,7 @@ describe("Family Expense Tracker App", () => {
     it("should create a new family", async () => {
       await requestHandle
         .post("/familymember/create")
+        .send(family)
         .set("Authorization", token)
         .expect(200);
     });
@@ -57,6 +59,7 @@ describe("Family Expense Tracker App", () => {
     it("shouldn't create a new family for second time ", async () => {
       await requestHandle
         .post("/familymember/create")
+        .send(family2)
         .set("Authorization", token)
         .expect(409);
     });
@@ -135,28 +138,6 @@ describe("Family Expense Tracker App", () => {
         .delete("/familymember/delete/1")
         .set("Authorization", token)
         .expect(200);
-    });
-  });
-
-  describe("Edit family name", () => {
-    const data = {
-      family_name: "New name",
-    };
-
-    it("shouldn't edit if you are not admin", async () => {
-      await requestHandle
-        .put("/family/edit/name")
-        .set("Authorization", user2Token)
-        .send(data)
-        .expect(402);
-    });
-
-    it("should edit if you are admin", async () => {
-      await requestHandle
-        .put("/family/edit/name")
-        .set("Authorization", token)
-        .send(data)
-        .expect(201);
     });
   });
 
