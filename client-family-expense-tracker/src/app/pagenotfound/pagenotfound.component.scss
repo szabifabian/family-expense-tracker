@@ -1,0 +1,13 @@
+@import "../../assets/styles/variables";
+
+mat-card {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: calc(10%);
+}
+
+mat-toolbar {
+    background-color: $mi-bg3;
+    color:white;
+}

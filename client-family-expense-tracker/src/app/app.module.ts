@@ -32,6 +32,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
 import { AddEditExpenseComponent } from './expenses/add-edit-expense/add-edit-expense.component';
 
+import { AnonymGuard } from './core/guards/anonym.guard';
+import { AuthGuard } from './core/guards/auth.guard';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +48,7 @@ import { AddEditExpenseComponent } from './expenses/add-edit-expense/add-edit-ex
     LoginComponent,
     RegisterComponent,
     AddEditExpenseComponent,
+    PagenotfoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +73,10 @@ import { AddEditExpenseComponent } from './expenses/add-edit-expense/add-edit-ex
     AppRoutingModule,
     MatTableModule,
   ],
-  providers: [],
+  providers: [
+		AuthGuard,
+		AnonymGuard
+	],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

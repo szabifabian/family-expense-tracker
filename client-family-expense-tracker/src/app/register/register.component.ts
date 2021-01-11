@@ -27,7 +27,7 @@ export class RegisterComponent {
       {}
     );
   }
-
+  
   register(form: FormGroup): void {
     if (form.valid) {
       delete form.value.name;
