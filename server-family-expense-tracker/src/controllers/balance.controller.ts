@@ -61,11 +61,9 @@ balanceRouter
     const loggedInUserId = req.user!.id;
     const expenseId = parseInt(req.params.expenseId);
     let familyMembers = await req.familymemberRepository!.findOne({
-      user: loggedInUserId,
-      balances: { id: expenseId },
-    });
+      user: loggedInUserId});
     let expense = await req.balanceRepository!.findOne({
-      familymembers: { id: familyMembers?.id },
+      familymembers: { family: {id: familyMembers?.family.id}},
     });
 
     const editedExpense = {
