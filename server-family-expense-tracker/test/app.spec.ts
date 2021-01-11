@@ -210,7 +210,7 @@ describe("Family Expense Tracker App", () => {
         .put("/balance/edit/5")
         .set("Authorization", token)
         .send(data2)
-        .expect(403);
+        .expect(200);
     });
 
   });
