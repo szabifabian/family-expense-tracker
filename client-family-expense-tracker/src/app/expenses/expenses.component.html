@@ -21,6 +21,7 @@
 					<ng-template #elseBlock2>{{expense.amount}}ft</ng-template>
 				</mat-panel-description>
 				<mat-panel-description>
+					<mat-icon (click)="openEditExpenseDialog(expense)">edit</mat-icon>
 					<mat-icon (click)="deleteExpense(expense.id)">delete</mat-icon>
 				</mat-panel-description>
 			</mat-expansion-panel-header>
@@ -28,6 +29,6 @@
 		</mat-expansion-panel>
 	</mat-accordion>
 </div>
-<button mat-mini-fab class="add-button" (click)="openAddIssueDialog()" matTooltip="new">
+<button mat-mini-fab class="add-button" (click)="openAddExpenseDialog()" matTooltip="new">
 	<mat-icon>add</mat-icon>
 </button>

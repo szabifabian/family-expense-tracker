@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { NotificationService } from '../../core/services/notification.service';
 import { ExpenseService } from  '../../core/services/expense.service';
 import { Expense } from '../../core/interfaces/expense.interface';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-edit-expense',
@@ -12,25 +13,36 @@ import { Expense } from '../../core/interfaces/expense.interface';
 })
 export class AddEditExpenseComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private ns: NotificationService, public is: ExpenseService) {
+  expenseForm: FormGroup;
+
+  isEditing = false;
+  expenseId = -1;
+
+  constructor(private formBuilder: FormBuilder, private ns: NotificationService, public is: ExpenseService, @Inject(MAT_DIALOG_DATA) public data: Expense) {
     this.expenseForm = this.formBuilder.group({
       title: [null, Validators.required],
       about: [null, Validators.required],
       type: [null, Validators.required],
       amount: [null, Validators.required],
     });
+    this.expenseId = data.id;
+
    }
 
   ngOnInit(): void {
-  }
-
-  expenseForm: FormGroup;
+    if (this.data) {
+        this.expenseForm.patchValue(this.data);
+        this.isEditing = true;
+    }
+}
 
   addExpense(form: FormGroup) {
-    if (form.valid) {
+    if (form.valid && !this.isEditing) {
       this.is.addExpense(<Expense>form.value);
     }
-    else {
+    else if (form.valid && this.isEditing) {
+      this.is.editExpense(<Expense>form.value, this.expenseId);
+    } else {
       this.ns.show('Error! Invalid data!');
     }
   }

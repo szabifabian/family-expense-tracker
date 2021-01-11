@@ -36,6 +36,15 @@ export class ExpenseService {
         })
     }
 
+    editExpense(expense: Expense, id: number) {
+        const header = new HttpHeaders().set(
+            'Authorization', `Bearer ${localStorage.getItem('token')}`,
+        );
+        this.http.put(`${baseUrl}/balance/edit/${id}`, expense, {headers: header, responseType: 'text' as 'json',}).subscribe(() => {
+            window.location.reload();
+        })
+    }
+
     deleteExpense(id: Number) {
         const header = new HttpHeaders().set(
             'Authorization', `Bearer ${localStorage.getItem('token')}`

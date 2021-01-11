@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ExpenseService } from '../core/services/expense.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEditExpenseComponent } from './add-edit-expense/add-edit-expense.component';
+import { Expense } from '../core/interfaces/expense.interface';
 
 @Component({
   selector: 'app-expenses',
@@ -15,10 +16,17 @@ export class ExpensesComponent implements OnInit {
     this.is.getExpenses();
   }
 
-  openAddIssueDialog(): void {
+  openAddExpenseDialog(): void {
 		const dialogRef = this.dialog.open(AddEditExpenseComponent, {
 			width: '1000px'
 		})
+  }
+
+  openEditExpenseDialog(expense: Expense): void {
+		const dialogRef = this.dialog.open(AddEditExpenseComponent, {
+      width: '1000px',
+      data: expense
+    })
   }
   
   deleteExpense(id: Number): void {

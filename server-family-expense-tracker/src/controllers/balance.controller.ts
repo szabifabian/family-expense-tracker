@@ -23,7 +23,6 @@ balanceRouter
     let expenses = await req.balanceRepository!.find({
       familymembers: { id: familyMembers?.id },
     });
-    console.log(expenses);
     res.send(expenses);
   })
   .get("/:expenseId", async (req, res) => {
@@ -87,7 +86,6 @@ balanceRouter
     }
   })
 
-  // TODO authorize user with the given id.
   .delete("/delete/:expenseId", async (req, res) => {
     const loggedInUserId = req.user!.id;
     const expenseId = parseInt(req.params.expenseId);
