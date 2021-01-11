@@ -4,23 +4,23 @@
 	<mat-accordion multi>
 		<mat-expansion-panel>
 			<mat-expansion-panel-header>
-				<mat-panel-title>
+				<mat-panel-title class="changeWidth">
 					#{{ i+1 }}
 				</mat-panel-title>
-				<mat-panel-description>
+				<mat-panel-description class="changeWidth">
 					{{ (expense.title.length > 10) ? (expense.title | slice:0:10) + '...' : expense.title }}
 				</mat-panel-description>
-				<mat-panel-description>
+				<mat-panel-description class="changeWidth">
 					<div *ngIf="expense.type === 'EXPENSE'; then thenBlock1 else elseBlock1"></div>
 					<ng-template #thenBlock1>Expense</ng-template>
 					<ng-template #elseBlock1>Income</ng-template>
 				</mat-panel-description>
-				<mat-panel-description>
+				<mat-panel-description class="changeWidth">
 					<div *ngIf="expense.type === 'EXPENSE'; then thenBlock2 else elseBlock2"></div>
 					<ng-template #thenBlock2>{{-expense.amount}}ft</ng-template>
 					<ng-template #elseBlock2>{{expense.amount}}ft</ng-template>
 				</mat-panel-description>
-				<mat-panel-description>
+				<mat-panel-description class="changeWidth">
 					<mat-icon (click)="openEditExpenseDialog(expense)">edit</mat-icon>
 					<mat-icon (click)="deleteExpense(expense.id)">delete</mat-icon>
 				</mat-panel-description>
