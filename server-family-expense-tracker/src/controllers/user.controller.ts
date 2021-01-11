@@ -47,6 +47,7 @@ userRouter
 
   .get("/", passport.authenticate('jwt', { session: false }), async (req, res) => {
     const loggedInUserId = (req.user!.id);
+    console.log(loggedInUserId);
     const user = await req.userRepository!.findOne({ id: loggedInUserId });
     if (!user) {
       return res.sendStatus(404); //required user is not found

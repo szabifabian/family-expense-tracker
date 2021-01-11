@@ -99,8 +99,9 @@ balanceRouter
         user: loggedInUserId,
       });
       let expenses = await req.balanceRepository!.find({
-        familymembers: { id: familyMembers?.id },
+        familymembers: { family: {id: familyMembers?.family.id} },
       });
+      console.log(expenses);
       res.send(expenses);
     } else {
       res.sendStatus(404);

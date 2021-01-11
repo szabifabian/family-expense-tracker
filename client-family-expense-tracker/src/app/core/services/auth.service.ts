@@ -18,7 +18,15 @@ export class AuthService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': ''
-    })
+    }),
+  };
+
+  httpOptionsRegister = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': '',
+    }),
+    responseType: 'text' as 'json',
   };
 
   constructor(
@@ -28,10 +36,10 @@ export class AuthService {
   ) { }
 
   register(user: User): void {
-    this.http.post<User>(`${baseUrl}/user/register`, user, this.httpOptions).subscribe(
+    this.http.post<User>(`${baseUrl}/user/register`, user, this.httpOptionsRegister).subscribe(
       data => {
         this.ns.show('You have registered successfully!');
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/login']);
       },
       error => {
         this.ns.show('Error! Registration failed!');
@@ -51,7 +59,9 @@ export class AuthService {
         
         this.isLogin$.next(true);
         this.ns.show('You are logged in!');
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/profile']).then(() => {
+          window.location.reload();
+        });
       },
       error => {
         this.ns.show('Error! Invalid credentials!');

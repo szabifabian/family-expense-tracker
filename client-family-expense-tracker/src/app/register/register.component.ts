@@ -21,14 +21,14 @@ export class RegisterComponent {
       {
         username: [null, [Validators.minLength(5), Validators.required]],
         email: [null, [Validators.email, Validators.required]],
-        password: [null, [Validators.required, Validators.minLength(8)]],
-        passwordConfirm: [null, Validators.required, Validators.minLength(8)],
+        password: [null, [Validators.required]],
       },
       {}
     );
   }
   
   register(form: FormGroup): void {
+    console.log("asd");
     if (form.valid) {
       delete form.value.name;
       delete form.value.passwordConfirm;
