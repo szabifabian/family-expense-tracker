@@ -25,7 +25,7 @@ export class AddEditExpenseComponent implements OnInit {
       type: [null, Validators.required],
       amount: [null, Validators.required],
     });
-    this.expenseId = data.id;
+    this.expenseId = data !== null ? data.id : -1;
 
    }
 
