@@ -35,7 +35,6 @@ A projekt célja a családi költségek nyomon követése, naplózása. A felhas
 - Családi csoport létrehozása, és a család többi tagjának meghívása egy egyedi azonosító segítségével. (A család létrehozója admin jogon kap a családon belül)
 - A meghívott fél dönthet arról, hogy elfogadja vagy sem a meghívást  
 - A kiadás és bevételek kezelése csoport szinten  
-- Felhasználóként engedélyezett a családból való kilépés  
 - Család létrehozójaként kidobhat bárkit az adott csoportból  
 - Kijelentkezés az alkalmazásból  
   
@@ -50,7 +49,7 @@ A projekt célja a családi költségek nyomon követése, naplózása. A felhas
   
 ### Objektumok közötti reláció  
   
-- **User - FamilyMember**  (1 <-> N)
+- **User - FamilyMember**  (1<->n)
 - **Family - FamilyMember**  (1<->n)
 - **FamilyMember - Balance**  (n<->n)
 - **User - Invitation** (1<->n)
